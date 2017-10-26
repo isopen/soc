@@ -1,0 +1,37 @@
+$auth_child_width: 320px;
+$child_el_radius: "3px";
+
+.auth_form .login_form {
+  padding: 20px;
+  width: $auth_child_width;
+  border-radius: $child_el_radius;
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}
+.auth_form .login_form input {
+  width: 270px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: $child_el_radius;
+  outline: none;
+  border: 1px solid #d3d9de;
+}
+
+.auth_form .login_form input:focus {
+  opacity: 0.7;
+}
+
+.auth_form .login_form .st_button {
+  width: 100px;
+  padding: 7px 16px 8px;
+  color: #ffffff;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  background: #1b8cc4;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.auth_form .login_form .st_button:hover {
+  background-color: #1596d6;
+}
