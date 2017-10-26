@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: '.login_form,.reg_form',
@@ -13,8 +14,9 @@ export class LoginComponent {
  
   ngOnInit(): void {}
   
-  login(): void {
+  login(form: NgForm): void {
     
+    console.log(form);
     this.http.get('/api/items').subscribe(data => {
       this.results = data['results'];
     });

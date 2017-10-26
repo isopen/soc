@@ -1,5 +1,5 @@
-<form>
-  <input placeholder="Телефон или e-mail" />
-  <input type="password" placeholder="Пароль" />
-  <button class="st_button" (click)="login()">Войти</button>
+<form #loginForm="ngForm">
+  <input name="login" placeholder="Телефон или e-mail" ngModel />
+  <input name="password" type="password" placeholder="Пароль" ngModel />
+  <button class="st_button" (click)="login(loginForm)">Войти</button>
 </form>
