@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2CableModule } from 'ng2-cable';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/controllers/login.component';

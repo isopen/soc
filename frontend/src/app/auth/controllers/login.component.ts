@@ -7,8 +7,6 @@ import { NgForm } from '@angular/forms';
   templateUrl: '../views/login.component.html'
 })
 export class LoginComponent {
-  
-  results: string[];
  
   constructor(private http: HttpClient) {}
  
@@ -17,9 +15,19 @@ export class LoginComponent {
   login(form: NgForm): void {
     
     console.log(form);
-    this.http.get('/api/items').subscribe(data => {
-      this.results = data['results'];
-    });
+    var params = {
+      login: form.value.login,
+      password: form.value.password
+    };
+    this.http.post('http://localhost:3000/login', params)
+    .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     
   }
   

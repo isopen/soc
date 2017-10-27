@@ -8,8 +8,15 @@ Bundler.require(*Rails.groups)
 
 module Backend
   class Application < Rails::Application
+    config.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    
+    Mongoid.load!('./config/mongoid.yml', :development)
+    
+    config.generators do |g|
+      g.orm :mongoid
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
