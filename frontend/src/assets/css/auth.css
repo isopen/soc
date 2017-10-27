@@ -1,19 +1,24 @@
-.auth_form .login_form {
+.auth_form .login_form, .auth_form .reg_form {
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 3px;
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8; }
 
-.auth_form .login_form .st_button {
+.auth_form .login_form .st_button, .auth_form .reg_form .st_button {
   font-size: 14px;
-  padding: 7px 16px 8px;
+  padding: 8px;
   outline: none;
   border: none;
   color: #ffffff;
-  background-color: #1b8cc4;
+  background-color: #5682a3;
   line-height: 20px;
-  border-radius: 3px; }
+  border-radius: 3px;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out; }
 
-.auth_form .login_form input {
+.auth_form .login_form input, .auth_form .reg_form input {
   margin-bottom: 10px;
   padding: 8px;
   border-radius: 3px;
@@ -21,7 +26,8 @@
   border: 1px solid #d3d9de; }
 
 .auth_form .login_form {
-  width: 320px; }
+  width: 320px;
+  margin: -50px auto auto auto; }
 
 .auth_form .login_form input {
   width: 270px; }
@@ -33,6 +39,22 @@
   width: 100px; }
 
 .auth_form .login_form .st_button:hover {
+  background-color: #1596d6; }
+
+.auth_form .reg_form {
+  width: 320px;
+  margin: 10px auto auto auto; }
+
+.auth_form .reg_form input {
+  width: 270px; }
+
+.auth_form .reg_form input:focus {
+  opacity: 0.7; }
+
+.auth_form .reg_form .st_button {
+  width: 150px; }
+
+.auth_form .reg_form .st_button:hover {
   background-color: #1596d6; }
 
 /*# sourceMappingURL=auth.css.map */

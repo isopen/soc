@@ -7,6 +7,7 @@ import { Ng2CableModule } from 'ng2-cable';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/controllers/login.component';
+import { RegComponent } from './auth/controllers/reg.component';
 
 @NgModule({
   imports: [
@@ -17,9 +18,13 @@ import { LoginComponent } from './auth/controllers/login.component';
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegComponent
   ],
   providers: [],
-  bootstrap: [LoginComponent]
+  bootstrap: [
+    LoginComponent,
+    RegComponent
+  ]
 })
 export class AppModule { }

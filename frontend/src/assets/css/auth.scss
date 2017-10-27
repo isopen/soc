@@ -1,26 +1,32 @@
 $params_forms: (
   auth_form_width: 320px,
   auth_form_input_width: 270px,
-  auth_form_button_width: 100px,
+  auth_form_login_button_width: 100px,
+  auth_form_reg_button_width: 150px,
   child_el_radius: 3px,
   form_padding: 20px,
   hover_opacity: 0.7,
   button_hover_color: #1596d6
 );
 %for_forms {
+  background-color: #ffffff;
   padding: map-get($params_forms, form_padding);
   border-radius: map-get($params_forms, child_el_radius);
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 %for_buttons {
   font-size: 14px;
-  padding: 7px 16px 8px;
+  padding: 8px;
   outline: none;
   border: none;
   color: #ffffff;
-  background-color: #1b8cc4;
+  background-color: #5682a3;
   line-height: 20px;
   border-radius: map-get($params_forms, child_el_radius);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 %for_inputs {
   margin-bottom: 10px;
@@ -32,6 +38,7 @@ $params_forms: (
 
 .auth_form .login_form {
   width: map-get($params_forms, auth_form_width);
+  margin: -50px auto auto auto;
   @extend %for_forms;
 }
 .auth_form .login_form input {
@@ -44,10 +51,33 @@ $params_forms: (
 }
 
 .auth_form .login_form .st_button {
-  width: map-get($params_forms, auth_form_button_width);
+  width: map-get($params_forms, auth_form_login_button_width);
   @extend %for_buttons;
 }
 
 .auth_form .login_form .st_button:hover {
+  background-color: map-get($params_forms, button_hover_color);
+}
+
+.auth_form .reg_form {
+  width: map-get($params_forms, auth_form_width);
+  margin: 10px auto auto auto;
+  @extend %for_forms;
+}
+.auth_form .reg_form input {
+  width: map-get($params_forms, auth_form_input_width);;
+  @extend %for_inputs;
+}
+
+.auth_form .reg_form input:focus {
+  opacity: map-get($params_forms, hover_opacity);
+}
+
+.auth_form .reg_form .st_button {
+  width: map-get($params_forms, auth_form_reg_button_width);
+  @extend %for_buttons;
+}
+
+.auth_form .reg_form .st_button:hover {
   background-color: map-get($params_forms, button_hover_color);
 }

@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: '.login_form',
-  templateUrl: '../views/login.component.html'
+  selector: '.reg_form',
+  templateUrl: '../views/reg.component.html'
 })
-export class LoginComponent {
+export class RegComponent {
   
   results: string[];
  
@@ -14,7 +14,7 @@ export class LoginComponent {
  
   ngOnInit(): void {}
   
-  login(form: NgForm): void {
+  reg(form: NgForm): void {
     
     console.log(form);
     this.http.get('/api/items').subscribe(data => {

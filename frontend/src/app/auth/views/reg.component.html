@@ -1,0 +1,6 @@
+<form #regForm="ngForm">
+  <input name="login" placeholder="Телефон или e-mail" ngModel />
+  <input name="password" type="password" placeholder="Пароль" ngModel />
+  <input name="repassword" type="password" placeholder="Подтверждение пароля" ngModel />
+  <button class="st_button" (click)="reg(regForm)">Регистрация</button>
+</form>
