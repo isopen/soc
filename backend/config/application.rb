@@ -12,8 +12,6 @@ module Backend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     
-    Mongoid.load!('./config/mongoid.yml', :development)
-    
     config.generators do |g|
       g.orm :mongoid
     end

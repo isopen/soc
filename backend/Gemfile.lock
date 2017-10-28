@@ -198,10 +198,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
-  devise
+  devise (~> 4.3.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mongoid (~> 6.1.0)

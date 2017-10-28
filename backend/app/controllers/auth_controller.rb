@@ -1,13 +1,14 @@
+require 'bcrypt'
+
 class AuthController < ApplicationController
   def login
-    user = User.new(login: params[:login], password: params[:login])
-    user.save
-    data = {:login => params[:login], :password => params[:login]}
-    render :json => data
+    render :json => {:login => params[:login], :encrypted_password => password}
   end
   def reg
-    user = User.new(login: params[:login], password: params[:login])
-    user.save
-    render :json => data
+    encrypted_password = BCrypt::Password.create(params[:password]);
+    token = SecureRandom.urlsafe_base64(61, false)
+    User.new(login: params[:login], encrypted_password: encrypted_password, token: token)
+        .save(validate: false)
+    render :json => {:login => params[:login], :token => token}
   end
 end
