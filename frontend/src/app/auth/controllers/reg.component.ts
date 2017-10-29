@@ -16,10 +16,19 @@ export class RegComponent {
   
   reg(form: NgForm): void {
     
-    console.log(form);
-    this.http.get('/api/items').subscribe(data => {
-      this.results = data['results'];
-    });
+    var params = {
+      login: form.value.login,
+      password: form.value.password
+    };
+    this.http.post('http://localhost:3000/reg', params)
+    .subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     
   }
   
