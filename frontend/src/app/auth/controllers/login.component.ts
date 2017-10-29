@@ -15,7 +15,7 @@ export class LoginComponent {
  
   constructor(
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) {}
  
   ngOnInit(): void {}

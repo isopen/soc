@@ -8,11 +8,16 @@ class AuthController < ApplicationController
     @len_token = 61
   end
   
+  #def auth_validator(login, password, token) {
+  #  return false;
+  #}
+  
   # if token then token elsif password password and return new token else error
   # string login
   # string password
   # string token
-  def login  
+  def login 
+    # TODO:: validator 
     res = {
       :success => false,
       :type => "login_error"
@@ -23,7 +28,7 @@ class AuthController < ApplicationController
         :success => true, 
         :type => "login_by_token"
       }
-    elsif (params[:login] != "" && params[:password] != "")
+    else
       user = User.where(login: params[:login]).first
       password = BCrypt::Password.new(user.encrypted_password)
       if(password == params[:password]) then
@@ -43,6 +48,7 @@ class AuthController < ApplicationController
   # string login
   # string password
   def reg
+    # TODO:: validator
     count = User.where(login: params[:login]).count
     if(count == 0) then
       encrypted_password = BCrypt::Password.create(params[:password]);

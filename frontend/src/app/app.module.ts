@@ -11,8 +11,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/controllers/login.component';
 import { RegComponent } from './auth/controllers/reg.component';
 
+const appRoutes: Routes = [
+  { 
+    path: 'login',
+    component: LoginComponent 
+  }
+];
+
 @NgModule({
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { 
+        enableTracing: true
+      }
+    ),
     BrowserModule,
     Ng2CableModule,
     HttpClientModule,
@@ -27,8 +40,7 @@ import { RegComponent } from './auth/controllers/reg.component';
     CookieService
   ],
   bootstrap: [
-    LoginComponent,
-    RegComponent
+    AppComponent
   ]
 })
 export class AppModule { }
