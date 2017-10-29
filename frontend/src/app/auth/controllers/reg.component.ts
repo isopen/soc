@@ -1,34 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: '.reg_form',
-  templateUrl: '../views/reg.component.html'
+  templateUrl: '../views/reg.component.html',
+  providers: [
+    AuthService
+  ]
 })
 export class RegComponent {
-  
-  results: string[];
  
-  constructor(private http: HttpClient) {}
+  constructor(
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {}
  
   ngOnInit(): void {}
   
   reg(form: NgForm): void {
     
-    var params = {
-      login: form.value.login,
-      password: form.value.password
-    };
-    this.http.post('http://localhost:3000/reg', params)
-    .subscribe(
-      data => {
-        console.log(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.authService.reg_client(form);
     
   }
   

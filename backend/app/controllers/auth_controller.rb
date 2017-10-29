@@ -2,22 +2,32 @@ require 'bcrypt'
 
 class AuthController < ApplicationController
   
+  attr_accessor :len_token;
+  
+  def initialize()
+    @len_token = 61
+  end
+  
   # if token then token elsif password password and return new token else error
   # string login
   # string password
   # string token
-  def login
+  def login  
+    res = {
+      :success => false,
+      :type => "login_error"
+    }
     user = User.where(login: params[:login], token: params[:token]).first
     if(user) then
       res = {
         :success => true, 
         :type => "login_by_token"
       }
-    elsif (params[:password])
+    elsif (params[:login] != "" && params[:password] != "")
       user = User.where(login: params[:login]).first
       password = BCrypt::Password.new(user.encrypted_password)
       if(password == params[:password]) then
-        user.token = SecureRandom.urlsafe_base64(61, false)
+        user.token = SecureRandom.urlsafe_base64(@len_token, false)
         user.save(validate: false)
         res = {
           :success => true, 
@@ -25,11 +35,6 @@ class AuthController < ApplicationController
           :token => user.token
         }
       end
-    else
-      res = {
-        :success => false,
-        :type => "login_error"
-      }
     end
     render :json => res
   end
@@ -41,7 +46,7 @@ class AuthController < ApplicationController
     count = User.where(login: params[:login]).count
     if(count == 0) then
       encrypted_password = BCrypt::Password.create(params[:password]);
-      token = SecureRandom.urlsafe_base64(61, false)
+      token = SecureRandom.urlsafe_base64(@len_token, false)
       User.new(login: params[:login], encrypted_password: encrypted_password, token: token)
         .save(validate: false)
       res = {
