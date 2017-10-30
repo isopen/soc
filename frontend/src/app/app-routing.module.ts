@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { NotComponent } from './404/not.component';
 import { AuthComponent } from './auth/auth.component';
 
 export const routes: Routes = [
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthComponent
+  },
+  {
+    path: '**',
+    component: NotComponent 
   }
 ];
 
