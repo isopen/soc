@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 
-import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: '.reg_form',
@@ -14,8 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class RegComponent {
  
   constructor(
-    private authService: AuthService,
-    private cookieService: CookieService
+    private authService: AuthService
   ) {}
  
   ngOnInit(): void {}
