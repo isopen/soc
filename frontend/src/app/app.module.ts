@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
+import { PageModule } from './page/page.module';
 import { NotModule } from './404/not.module';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { NotModule } from './404/not.module';
     FormsModule,
     AppRoutingModule,
     AuthModule,
+    PageModule,
     NotModule
   ],
   declarations: [

@@ -4,20 +4,25 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
-import { NotComponent } from './not.component';
+import { PageComponent } from './page.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   declarations: [
-    NotComponent
+    PageComponent
+  ],
+  providers: [
+    CookieService
   ],
   bootstrap: [
-    NotComponent
+    PageComponent
   ]
 })
-export class NotModule { }
+export class PageModule { }
