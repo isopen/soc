@@ -25,8 +25,12 @@
   outline: none;
   border: 1px solid #d3d9de; }
 
+.auth_form {
+  width: 310px;
+  margin: auto; }
+
 .auth_form .login_form {
-  width: 320px;
+  width: 310px;
   margin: -50px auto auto auto; }
 
 .auth_form .login_form input {
@@ -42,7 +46,7 @@
   background-color: #1596d6; }
 
 .auth_form .reg_form {
-  width: 320px;
+  width: 310px;
   margin: 10px auto auto auto; }
 
 .auth_form .reg_form input {

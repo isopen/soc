@@ -1,5 +1,5 @@
 $params_forms: (
-  auth_form_width: 320px,
+  auth_form_width: 310px,
   auth_form_input_width: 270px,
   auth_form_login_button_width: 100px,
   auth_form_reg_button_width: 150px,
@@ -34,6 +34,11 @@ $params_forms: (
   border-radius: map-get($params_forms, child_el_radius);
   outline: none;
   border: 1px solid #d3d9de;
+}
+
+.auth_form {
+  width: map-get($params_forms, auth_form_width);
+  margin: auto;
 }
 
 .auth_form .login_form {

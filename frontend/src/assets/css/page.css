@@ -1,0 +1,23 @@
+.body_page {
+  height: 2000px;
+  background-color: #ffffff;
+  margin: -230px auto auto auto;
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8; }
+
+.body_page .col-md-1 {
+  padding: 0px;
+  width: auto; }
+
+.body_page .col-md-1 .photo_page {
+  padding: 15px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8; }
+
+.body_page .col-md-1 .photo_page .avatar {
+  background-color: gray;
+  max-width: 200px;
+  width: 200px;
+  height: 200px; }
+
+/*# sourceMappingURL=page.css.map */

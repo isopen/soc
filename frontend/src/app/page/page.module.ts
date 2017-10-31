@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 import { PageComponent } from './page.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { PageComponent } from './page.component';
     FormsModule
   ],
   declarations: [
-    PageComponent
+    PageComponent,
+    PhotoComponent
   ],
   providers: [
     CookieService
