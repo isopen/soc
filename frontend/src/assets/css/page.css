@@ -1,23 +1,66 @@
+.container {
+  padding: 0px;
+  margin: 0px; }
+
+.row {
+  margin-right: 0px; }
+
 .body_page {
-  height: 2000px;
-  background-color: #ffffff;
+  height: 100%;
+  background-color: #fff;
   margin: -230px auto auto auto;
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8; }
+
+.body_page .container:nth-child(1) .row {
+  background: #5682a3;
+  height: 48px;
+  outline: 0; }
 
 .body_page .col-md-1 {
   padding: 0px;
   width: auto; }
 
-.body_page .col-md-1 .photo_page {
-  padding: 15px;
+.body_page .photo_page {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8; }
 
-.body_page .col-md-1 .photo_page .avatar {
+.photo_page .avatar {
   background-color: gray;
   max-width: 200px;
   width: 200px;
   height: 200px; }
+
+.menu_page {
+  color: #fff;
+  padding: 17px 20px 15px 22px;
+  display: block;
+  font-size: 14px;
+  line-height: 16px; }
+
+.hamburder_icon_box {
+  display: inline-block;
+  width: 18px;
+  height: 14px; }
+
+.hamburder_icon_box .part_hamburder {
+  background: #fff;
+  display: block;
+  height: 2px;
+  margin: 0; }
+
+.hamburder_icon_box .part_hamburder:nth-child(2) {
+  margin-bottom: 4px;
+  margin-top: 4px; }
+
+.body_page .wall_page {
+  padding: 0px 0px 0px 30px;
+  border-left: 1px solid #e3e4e8;
+  overflow-y: hidden;
+  min-height: 700px; }
+
+.body_page .container:nth-child(2) .col-xs-3 {
+  width: 200px;
+  margin-right: 2px; }
 
 /*# sourceMappingURL=page.css.map */

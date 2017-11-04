@@ -9,6 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { PageComponent } from './page.component';
 import { PhotoComponent } from './photo/photo.component';
+import { MenuComponent } from './menu/menu.component';
+import { WallComponent } from './wall/wall.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { PhotoComponent } from './photo/photo.component';
   ],
   declarations: [
     PageComponent,
-    PhotoComponent
+    PhotoComponent,
+    MenuComponent,
+    WallComponent
   ],
   providers: [
     CookieService
