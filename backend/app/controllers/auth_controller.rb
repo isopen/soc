@@ -26,7 +26,8 @@ class AuthController < ApplicationController
     if(user) then
       res = {
         :success => true, 
-        :type => "login_by_token"
+        :type => "login_by_token",
+        :id => user['_id']
       }
     else
       user = User.where(login: params[:login]).first
@@ -37,7 +38,8 @@ class AuthController < ApplicationController
         res = {
           :success => true, 
           :type => "login_by_pass", 
-          :token => user.token
+          :token => user.token,
+          :id => user['_id']
         }
       end
     end

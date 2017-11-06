@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AuthService } from '../auth.service';
 
@@ -13,14 +14,30 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
  
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private cookieService: CookieService
   ) {}
  
   ngOnInit(): void {}
   
   login(form: NgForm): void {
+    
+    var params = {},
+        login = this.cookieService.get('_login'),
+        token = this.cookieService.get('_token');
+    if(login == form.value.login && token) {
+      params = {
+        login: form.value.login,
+        token: token
+      };
+    }else {
+      params = {
+        login: form.value.login,
+        password: form.value.password
+      };
+    }
 
-    this.authService.auth_client(form);
+    this.authService.auth_client(params);
     
   }
   
