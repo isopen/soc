@@ -30,7 +30,6 @@
   min-height: 200px;
   max-width: 200px;
   width: 200px;
-  height: 200px;
 }
 
 .menu_page {
@@ -42,6 +41,7 @@
 }
 
 .hamburder_icon_box {
+  cursor: pointer;
   display: inline-block;
   width: 18px;
   height: 14px;
@@ -52,11 +52,71 @@
   display: block;
   height: 2px;
   margin: 0;
+  -webkit-transition: -webkit-transform 0.1s ease-in;
+  -o-transition: -o-transform 0.1s ease;
+  -ms-transition: -ms-transform 0.1s ease;
+  -moz-transition: -moz-transform 0.1s ease;
+  transition: transform 0.1s ease-in;
+  -webkit-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
 
 .hamburder_icon_box .part_hamburder:nth-child(2) {
   margin-bottom: 4px;
   margin-top: 4px;
+}
+
+.hamburder_icon_box.open .part_hamburder:nth-child(1) {
+  -webkit-transform: translate3d(0, 6px, 0) rotate(45deg);
+  -moz-transform: translate3d(0, 6px, 0) rotate(45deg);
+  -o-transform: translate3d(0, 6px, 0) rotate(45deg);
+  -ms-transform: translate3d(0, 6px, 0) rotate(45deg);
+  transform: translate3d(0, 6px, 0) rotate(45deg);
+}
+.hamburder_icon_box.open .part_hamburder:nth-child(2) {
+  opacity: 0;
+}
+.hamburder_icon_box.open .part_hamburder:nth-child(3) {
+  -webkit-transform: translate3d(0, -6px, 0) rotate(-45deg);
+  -moz-transform: translate3d(0, -6px, 0) rotate(-45deg);
+  -o-transform: translate3d(0, -6px, 0) rotate(-45deg);
+  -ms-transform: translate3d(0, -6px, 0) rotate(-45deg);
+  transform: translate3d(0, -6px, 0) rotate(-45deg);
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 92%;
+  left: 2%;
+  z-index: 1000;
+  float: left;
+  width: 215px;
+  min-width: 160px;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  background-clip: padding-box;
+  padding: 10px;
+}
+
+.dropdown_menu li {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.dropdown_menu li > a {
+  text-decoration: none;
+}
+
+.dropdown_menu li:hover {
+  background: #f2f6fa;
 }
 
 .body_page .wall_page {

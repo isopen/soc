@@ -1,26 +1,27 @@
-<div class="hamburder_icon_box">
+<div [class]="hamburder_icon_box" (click)="toggle_menu()">
   <span class="part_hamburder"></span>
   <span class="part_hamburder"></span>
   <span class="part_hamburder"></span>
 </div>
+<ul class="dropdown_menu" [hidden]="toggle_dropdown_menu">
+  <li>
+    <a>
+      Моя страница
+    </a>
+  </li>
+  <li>
+    <a>
+      Сообщения
+    </a>
+  </li>
+  <li>
+    <a>
+      Друзья
+    </a>
+  </li>
+</ul>
 <!--<div class="menu">
   <nav>
-    <ul>
-      <li>
-        <a>
-          <div>Моя страница</div>
-        </a>
-      </li>
-      <li>
-        <a>
-          <div>Сообщения</div>
-        </a>
-      </li>
-      <li>
-        <a>
-          <div>Друзья</div>
-        </a>
-      </li>
-    </ul>
+    
   </nav>
 </div>-->
