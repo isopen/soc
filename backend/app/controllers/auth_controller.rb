@@ -22,7 +22,17 @@ class AuthController < ApplicationController
       :success => false,
       :type => "login_error"
     }
-    user = User.where(login: params[:login], token: params[:token]).first
+    
+    user = User.any_of(
+      {
+        login: params[:login], 
+        token: params[:token]
+      }, 
+      {
+        _id: params[:guid] ? BSON::ObjectId(params[:guid]) : "", 
+        token: params[:token]
+      }
+    ).first
     if(user) then
       res = {
         :success => true, 

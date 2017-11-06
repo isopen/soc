@@ -28,12 +28,14 @@ export class LoginComponent {
     if(login == form.value.login && token) {
       params = {
         login: form.value.login,
-        token: token
+        token: token,
+        fl_auth_page: true
       };
     }else {
       params = {
         login: form.value.login,
-        password: form.value.password
+        password: form.value.password,
+        fl_auth_page: true
       };
     }
 

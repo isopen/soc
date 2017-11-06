@@ -23,15 +23,19 @@ export class AuthService {
         console.log(responce);
         switch(responce['type']) {
           case "login_by_pass":
+            this.cookieService.set('_guid', responce['id']['$oid']);
             this.cookieService.set('_login', params['login']);
             this.cookieService.set('_token', responce['token']);
           break;
           case "login_error":
+            this.cookieService.delete('_guid');
             this.cookieService.delete('_login');
             this.cookieService.delete('_token');
           break;
         };
-        this.router.navigateByUrl('/page/' + responce['id']['$oid']);
+        if(params['fl_auth_page'] == true) {
+          this.router.navigateByUrl('/page/' + responce['id']['$oid']);
+        }
       },
       error => {
         console.log(error);
@@ -47,6 +51,8 @@ export class AuthService {
     this.http.post(this.host + '/reg', params)
     .subscribe(
       data => {
+        params['fl_auth_page'] = true;
+        this.auth_client(params);
         console.log(data);
       },
       error => {
