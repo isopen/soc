@@ -8,7 +8,7 @@ class AuthController < ApplicationController
     @len_token = 61
   end
   
-  # if token then token elsif password password and return new token else error
+  # if token then login_by_token else login_by_pass and return new token else error
   # string guid
   # string login
   # string password
