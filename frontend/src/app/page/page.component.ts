@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute} from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
 
@@ -12,11 +13,12 @@ import { AuthService } from '../auth/auth.service';
 export class PageComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private activateRoute: ActivatedRoute
   ) {}
   ngOnInit() {
     var params = {
-      guid: this.cookieService.get('_guid'),
+      guid: this.activateRoute['url']['value'][1].path,
       token: this.cookieService.get('_token')
     };
     this.authService.auth_client(params);

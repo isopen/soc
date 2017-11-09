@@ -8,50 +8,49 @@ class AuthController < ApplicationController
     @len_token = 61
   end
   
-  #def auth_validator(login, password, token) {
-  #  return false;
-  #}
-  
   # if token then token elsif password password and return new token else error
+  # string guid
   # string login
   # string password
   # string token
-  def login 
-    # TODO:: validator 
-    res = {
-      :success => false,
-      :type => "login_error"
-    }
-    
-    user = User.any_of(
-      {
-        login: params[:login], 
-        token: params[:token]
-      }, 
-      {
-        _id: params[:guid] ? BSON::ObjectId(params[:guid]) : "", 
-        token: params[:token]
-      }
-    ).first
-    if(user) then
-      res = {
-        :success => true, 
-        :type => "login_by_token",
-        :id => user['_id']
-      }
-    else
-      user = User.where(login: params[:login]).first
-      password = BCrypt::Password.new(user.encrypted_password)
-      if(password == params[:password]) then
-        user.token = SecureRandom.urlsafe_base64(@len_token, false)
-        user.save(validate: false)
+  def login
+    begin
+      user = User.any_of(
+        {
+          login: params[:login], 
+          token: params[:token]
+        }, 
+        {
+          _id: params[:guid] ? BSON::ObjectId(params[:guid]) : "", 
+          token: params[:token]
+        }
+      ).first
+      if(user) then
         res = {
           :success => true, 
-          :type => "login_by_pass", 
-          :token => user.token,
+          :type => "login_by_token",
           :id => user['_id']
         }
+      else
+        user = User.where(login: params[:login]).first
+        password = BCrypt::Password.new(user.encrypted_password)
+        if(password == params[:password]) then
+          user.token = SecureRandom.urlsafe_base64(@len_token, false)
+          user.save(validate: false)
+          res = {
+            :success => true, 
+            :type => "login_by_pass", 
+            :token => user.token,
+            :id => user['_id']
+          }
+        end
       end
+    rescue
+      p "#{$!.inspect}"
+      res = {
+        :success => false,
+        :type => "login_error"
+      }
     end
     render :json => res
   end
@@ -60,7 +59,6 @@ class AuthController < ApplicationController
   # string login
   # string password
   def reg
-    # TODO:: validator
     count = User.where(login: params[:login]).count
     if(count == 0) then
       encrypted_password = BCrypt::Password.create(params[:password]);
