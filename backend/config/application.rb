@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Backend
   class Application < Rails::Application
+    
     config.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
@@ -15,6 +16,8 @@ module Backend
     config.generators do |g|
       g.orm :mongoid
     end
+    
+    config.host = "http://localhost:3000"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
