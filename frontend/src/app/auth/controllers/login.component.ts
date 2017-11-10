@@ -19,22 +19,11 @@ export class LoginComponent {
   
   login(form: NgForm): void {
     
-    var params = {},
-        login = this.cookieService.get('_login'),
-        token = this.cookieService.get('_token');
-    if(login == form.value.login && token) {
-      params = {
-        login: form.value.login,
-        token: token,
-        fl_auth_page: true
-      };
-    }else {
-      params = {
-        login: form.value.login,
-        password: form.value.password,
-        fl_auth_page: true
-      };
-    }
+    var params = {
+      login: form.value.login,
+      password: form.value.password,
+      fl_auth_page: true
+    };
 
     this.authService.auth_client(params);
     

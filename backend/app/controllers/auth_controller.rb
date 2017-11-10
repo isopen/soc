@@ -63,12 +63,12 @@ class AuthController < ApplicationController
     if(count == 0) then
       encrypted_password = BCrypt::Password.create(params[:password]);
       token = SecureRandom.urlsafe_base64(@len_token, false)
-      User.new(login: params[:login], encrypted_password: encrypted_password, token: token)
-        .save(validate: false)
+      user = User.new(login: params[:login], encrypted_password: encrypted_password, token: token)
+      user.save(validate: false)
       res = {
         :success => true,
         :type => "reg_by_loginpass",
-        :login => params[:login], 
+        :id => user['_id'],
         :token => token
       }
     else

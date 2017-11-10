@@ -16,26 +16,32 @@ export class AuthService {
     private config: ConfigService
   ) {}
   
+  private set_session(id: string, token: string) {
+    this.cookieService.set('_guid', id);
+    this.cookieService.set('_token', token);
+  }
+  
+  private remove_session() {
+    this.cookieService.delete('_guid');
+    this.cookieService.delete('_token');
+  }
+  
   auth_client(params: Object): void {
     
     this.http.post(this.config.back_host + '/login', params)
     .subscribe(
-      responce => {
-        console.log(responce);
-        switch(responce['type']) {
+      response => {
+        console.log(response);
+        switch(response['type']) {
           case "login_by_pass":
-            this.cookieService.set('_guid', responce['id']['$oid']);
-            this.cookieService.set('_login', params['login']);
-            this.cookieService.set('_token', responce['token']);
+            this.set_session(response['id']['$oid'], response['token']);
           break;
           case "login_error":
-            this.cookieService.delete('_guid');
-            this.cookieService.delete('_login');
-            this.cookieService.delete('_token');
+            this.remove_session();
           break;
         };
         if(params['fl_auth_page'] == true) {
-          this.router.navigateByUrl('/page/' + responce['id']['$oid']);
+          this.router.navigateByUrl('/page/' + response['id']['$oid']);
         }
       },
       error => {
@@ -51,10 +57,15 @@ export class AuthService {
     };
     this.http.post(this.config.back_host + '/reg', params)
     .subscribe(
-      data => {
-        params['fl_auth_page'] = true;
+      response => {
+        console.log(response);
+        this.set_session(response['id']['$oid'], response['token']);
+        var params = {
+          guid: response['id']['$oid'],
+          token: response['token'],
+          fl_auth_page: true
+        };
         this.auth_client(params);
-        console.log(data);
       },
       error => {
         console.log(error);

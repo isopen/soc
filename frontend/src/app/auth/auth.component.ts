@@ -11,7 +11,7 @@ export class AuthComponent {
     private cookieService: CookieService,
     private router: Router
   ) {
-    if(this.cookieService.check("_guid") && this.cookieService.check("_login") && this.cookieService.check("_token")) {
+    if(this.cookieService.check("_guid") && this.cookieService.check("_token")) {
       this.router.navigateByUrl('/page/' + this.cookieService.get("_guid"));
     }
   }
