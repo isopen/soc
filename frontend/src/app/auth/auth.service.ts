@@ -35,14 +35,14 @@ export class AuthService {
         switch(response['type']) {
           case "login_by_pass":
             this.set_session(response['id']['$oid'], response['token']);
+            if(params['fl_auth_page'] == true) {
+              this.router.navigateByUrl('/page/' + response['id']['$oid']);
+            }
           break;
           case "login_error":
             this.remove_session();
           break;
         };
-        if(params['fl_auth_page'] == true) {
-          this.router.navigateByUrl('/page/' + response['id']['$oid']);
-        }
       },
       error => {
         console.log(error);
@@ -71,6 +71,11 @@ export class AuthService {
         console.log(error);
       }
     );
+  }
+  
+  exit_client(): void {
+    this.remove_session();
+    this.router.navigateByUrl('/');
   }
   
 }
