@@ -17,13 +17,13 @@ export class AuthService {
   ) {}
   
   private set_session(id: string, token: string) {
-    this.cookieService.set('_guid', id);
-    this.cookieService.set('_token', token);
+    this.cookieService.set('_guid', id, null, '/');
+    this.cookieService.set('_token', token, null, '/');
   }
   
   private remove_session() {
-    this.cookieService.delete('_guid');
-    this.cookieService.delete('_token');
+    this.cookieService.delete('_guid', '/');
+    this.cookieService.delete('_token', '/');
   }
   
   auth_client(params: Object): void {
