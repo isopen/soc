@@ -15,6 +15,8 @@ import { AuthModule } from './auth/auth.module';
 import { PageModule } from './page/page.module';
 import { NotModule } from './404/not.module';
 
+import { ConfigService } from './app.config';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { NotModule } from './404/not.module';
     AppComponent
   ],
   providers: [
-    CookieService
+    CookieService,
+    ConfigService
   ],
   bootstrap: [
     AppComponent

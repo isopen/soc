@@ -6,10 +6,7 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: '.login_form',
-  templateUrl: '../views/login.component.html',
-  providers: [
-    AuthService
-  ]
+  templateUrl: '../views/login.component.html'
 })
 export class LoginComponent {
  

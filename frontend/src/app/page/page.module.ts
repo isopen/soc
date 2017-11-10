@@ -4,7 +4,6 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 import { PageComponent } from './page.component';

@@ -5,10 +5,7 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: '.reg_form',
-  templateUrl: '../views/reg.component.html',
-  providers: [
-    AuthService
-  ]
+  templateUrl: '../views/reg.component.html'
 })
 export class RegComponent {
  

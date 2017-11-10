@@ -4,20 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
+import { ConfigService } from '../app.config';
+
 @Injectable()
 export class AuthService {
-  
-  private host = 'http://localhost:3000';
   
   constructor(
     private http: HttpClient, 
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private config: ConfigService
   ) {}
   
   auth_client(params: Object): void {
     
-    this.http.post(this.host + '/login', params)
+    this.http.post(this.config.back_host + '/login', params)
     .subscribe(
       responce => {
         console.log(responce);
@@ -48,7 +49,7 @@ export class AuthService {
       login: form.value.login,
       password: form.value.password
     };
-    this.http.post(this.host + '/reg', params)
+    this.http.post(this.config.back_host + '/reg', params)
     .subscribe(
       data => {
         params['fl_auth_page'] = true;

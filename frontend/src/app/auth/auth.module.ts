@@ -11,6 +11,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './controllers/login.component';
 import { RegComponent } from './controllers/reg.component';
 
+import { AuthService } from './auth.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { RegComponent } from './controllers/reg.component';
     RegComponent
   ],
   providers: [
-    CookieService
+    CookieService,
+    AuthService
   ],
   bootstrap: [
     AuthComponent
