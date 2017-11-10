@@ -14,6 +14,10 @@ class AuthController < ApplicationController
   # string password
   # string token
   def login
+    res = {
+      :success => false,
+      :type => "login_error"
+    }
     begin
       user = User.any_of(
         {
@@ -47,10 +51,6 @@ class AuthController < ApplicationController
       end
     rescue
       p "#{$!.inspect}"
-      res = {
-        :success => false,
-        :type => "login_error"
-      }
     end
     render :json => res
   end

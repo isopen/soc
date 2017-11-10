@@ -148,7 +148,7 @@ development:
 test:
   clients:
     default:
-      database: test
+      database: bang
       hosts:
         - localhost:27017
       options:
