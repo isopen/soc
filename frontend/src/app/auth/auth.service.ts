@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 import { ConfigService } from '../app.config';
@@ -10,21 +9,20 @@ import { ConfigService } from '../app.config';
 export class AuthService {
   
   constructor(
-    private http: HttpClient, 
-    private cookieService: CookieService,
+    private http: HttpClient,
     private router: Router,
     private config: ConfigService
   ) {}
   
-  private set_session(id: string, token: string) {
-    this.cookieService.set('_guid', id, null, '/');
-    this.cookieService.set('_token', token, null, '/');
+  private set_session(id: string, token: string): void {
+    localStorage.setItem('_guid', id);
+    localStorage.setItem('_token', token);
   }
   
-  private remove_session() {
+  private remove_session(): void {
     var params = {
-      guid: this.cookieService.get('_guid'),
-      token: this.cookieService.get('_token')
+      guid: localStorage.getItem('_guid'),
+      token: localStorage.getItem('_token')
     };
     //async
     this.http.post(this.config.back_host + '/rem', params)
@@ -36,8 +34,8 @@ export class AuthService {
         console.log(error);
       }
     );
-    this.cookieService.delete('_guid', '/');
-    this.cookieService.delete('_token', '/');
+    localStorage.removeItem('_guid');
+    localStorage.removeItem('_token');
   }
   
   auth_client(params: Object): void {
@@ -96,6 +94,12 @@ export class AuthService {
         console.log(error);
       }
     );
+  }
+  
+  redirect_to_user_page(): void {
+    if(localStorage.getItem("_guid") && localStorage.getItem("_token")) {
+      this.router.navigateByUrl('/page/' + localStorage.getItem("_guid"));
+    }
   }
   
   exit_client(): void {
