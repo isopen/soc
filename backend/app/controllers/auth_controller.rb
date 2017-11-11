@@ -72,6 +72,29 @@ class AuthController < ApplicationController
     end
   end
   
+  # if need delete token (example: exit user)
+  # string guid
+  # string token
+  def remove_token()
+    res = {
+      :success => false,
+      :type => "remove_token_error"
+    }
+    begin
+      Token.where(
+        users_id: params[:guid] ? BSON::ObjectId(params[:guid]) : "",
+        token: params[:token]
+      ).delete
+      res = {
+        :success => true,
+        :type => "remove_token"
+      }
+    rescue
+      p "#{$!.inspect}"
+    end
+    render :json => res
+  end
+  
   # if token then login_by_token else login_by_pass and return new token else error
   # string guid
   # string login

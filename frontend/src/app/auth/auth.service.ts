@@ -22,6 +22,20 @@ export class AuthService {
   }
   
   private remove_session() {
+    var params = {
+      guid: this.cookieService.get('_guid'),
+      token: this.cookieService.get('_token')
+    };
+    //async
+    this.http.post(this.config.back_host + '/rem', params)
+    .subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     this.cookieService.delete('_guid', '/');
     this.cookieService.delete('_token', '/');
   }
