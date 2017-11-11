@@ -8,6 +8,70 @@ class AuthController < ApplicationController
     @len_token = 61
   end
   
+  def login_by_token(guid, token)
+    begin
+      token_is = Token.where(
+        users_id: guid ? BSON::ObjectId(guid) : "",
+        token: token
+      ).first
+      if(token_is) then
+        return {
+          :success => true, 
+          :type => "login_by_token",
+          :id => token_is['users_id']
+        }
+      else
+        return {
+          :success => false,
+          :type => "login_error"
+        }
+      end
+    rescue
+      return {
+        :success => false,
+        :type => "login_error"
+      }
+    end
+  end
+  
+  def login_by_pass(login, pass)
+    begin
+      user = User.where(login: login).first
+      if(user) then
+        password = BCrypt::Password.new(user.encrypted_password)
+        if(password == pass) then
+          token = SecureRandom.urlsafe_base64(@len_token, false)
+          user.tokens.create(
+            token: token,
+            ip: request.remote_ip,
+            user_agent: request.user_agent
+          )
+          return {
+            :success => true, 
+            :type => "login_by_pass", 
+            :token => token,
+            :id => user['_id']
+          }
+        else
+          return {
+            :success => false,
+            :type => "login_error"
+          }
+        end
+      else
+        return {
+          :success => false,
+          :type => "login_error"
+        }
+      end
+    rescue
+      return {
+        :success => false,
+        :type => "login_error"
+      }
+    end
+  end
+  
   # if token then login_by_token else login_by_pass and return new token else error
   # string guid
   # string login
@@ -19,33 +83,9 @@ class AuthController < ApplicationController
       :type => "login_error"
     }
     begin
-      token = Token.where(
-        users_id: params[:guid] ? BSON::ObjectId(params[:guid]) : "",
-        token: params[:token]
-      ).first
-      if(token) then
-        res = {
-          :success => true, 
-          :type => "login_by_token",
-          :id => token['users_id']
-        }
-      else
-        user = User.where(login: params[:login]).first
-        password = BCrypt::Password.new(user.encrypted_password)
-        if(password == params[:password]) then
-          token = SecureRandom.urlsafe_base64(@len_token, false)
-          user.tokens.create(
-            token: token,
-            ip: request.remote_ip,
-            user_agent: request.user_agent
-          )
-          res = {
-            :success => true, 
-            :type => "login_by_pass", 
-            :token => token,
-            :id => user['_id']
-          }
-        end
+      res = login_by_token(params[:guid], params[:token])
+      if(!res[:success]) then
+        res = login_by_pass(params[:login], params[:password])
       end
     rescue
       p "#{$!.inspect}"
