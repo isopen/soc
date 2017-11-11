@@ -32,9 +32,9 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     
     # (login && password) reg
     thr = []
-    10.times do |n|
+    3.times do |n|
       thr << Thread.new(n) do |i|
-        100.times do
+        1000.times do
           s_rand = OpenSSL::Random.random_bytes(10).unpack('H*').join
           opt = {"login" => s_rand, "password" => s_rand}
           response = RestClient.post (Backend::Application.config.host + "/reg"), opt
