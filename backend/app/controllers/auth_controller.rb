@@ -27,6 +27,7 @@ class AuthController < ApplicationController
         }
       end
     rescue
+      p "#{$!.inspect}"
       return {
         :success => false,
         :type => "login_error"
@@ -65,6 +66,7 @@ class AuthController < ApplicationController
         }
       end
     rescue
+      p "#{$!.inspect}"
       return {
         :success => false,
         :type => "login_error"
@@ -120,27 +122,35 @@ class AuthController < ApplicationController
   # string login
   # string password
   def reg
-    count = User.where(login: params[:login]).count
-    if(count == 0) then
-      encrypted_password = BCrypt::Password.create(params[:password]);
-      token = SecureRandom.urlsafe_base64(@len_token, false)
-      user = User.new(
-        login: params[:login],
-        encrypted_password: encrypted_password
-      )
-      user.save(validate: false)
-      user.tokens.create(
-        token: token,
-        ip: request.remote_ip,
-        user_agent: request.user_agent
-      )
-      res = {
-        :success => true,
-        :type => "reg_by_loginpass",
-        :id => user['_id'],
-        :token => token
-      }
-    else
+    begin
+      count = User.where(login: params[:login]).count
+      if(count == 0) then
+        encrypted_password = BCrypt::Password.create(params[:password]);
+        token = SecureRandom.urlsafe_base64(@len_token, false)
+        user = User.new(
+          login: params[:login],
+          encrypted_password: encrypted_password
+        )
+        user.save(validate: false)
+        user.tokens.create(
+          token: token,
+          ip: request.remote_ip,
+          user_agent: request.user_agent
+        )
+        res = {
+          :success => true,
+          :type => "reg_by_loginpass",
+          :id => user['_id'],
+          :token => token
+        }
+      else
+        res = {
+          :success => false,
+          :type => "reg_error"
+        }
+      end
+    rescue
+      p "#{$!.inspect}"
       res = {
         :success => false,
         :type => "reg_error"

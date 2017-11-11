@@ -1,4 +1,5 @@
 require 'bcrypt'
+require "openssl"
 
 class AuthControllerTest < ActionDispatch::IntegrationTest
   
@@ -28,6 +29,22 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     
   end
   test "auth_reg" do
-    assert true
+    
+    # (login && password) reg
+    thr = []
+    10.times do |n|
+      thr << Thread.new(n) do |i|
+        100.times do
+          s_rand = OpenSSL::Random.random_bytes(10).unpack('H*').join
+          opt = {"login" => s_rand, "password" => s_rand}
+          response = RestClient.post (Backend::Application.config.host + "/reg"), opt
+          assert_equal true, JSON.parse(response)["success"]
+        end
+      end
+    end
+    thr.each do |t|
+      t.join
+    end
+    
   end
 end
