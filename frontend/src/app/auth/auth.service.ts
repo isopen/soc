@@ -39,6 +39,11 @@ export class AuthService {
               this.router.navigateByUrl('/page/' + response['id']['$oid']);
             }
           break;
+          case "login_by_token":
+            if(params['fl_auth_page'] == true) {
+              this.router.navigateByUrl('/page/' + response['id']['$oid']);
+            }
+          break;
           case "login_error":
             this.remove_session();
           break;
@@ -59,13 +64,19 @@ export class AuthService {
     .subscribe(
       response => {
         console.log(response);
-        this.set_session(response['id']['$oid'], response['token']);
-        var params = {
-          guid: response['id']['$oid'],
-          token: response['token'],
-          fl_auth_page: true
-        };
-        //this.auth_client(params);
+        switch(response['type']) {
+          case "reg_by_loginpass":
+            this.set_session(response['id']['$oid'], response['token']);
+            var params = {
+              guid: response['id']['$oid'],
+              token: response['token'],
+              fl_auth_page: true
+            };
+            this.auth_client(params);
+          break;
+          case "reg_error":
+          break;
+        }
       },
       error => {
         console.log(error);
