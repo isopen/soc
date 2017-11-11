@@ -12,15 +12,13 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
       assert_equal false, JSON.parse(response)["success"]
     end
     
-    # ((guid && token) || (login && token)) auth
-    User.all.each do |u|    
-      opt = {"login" => u.login, "token" => u.token}
-      response = RestClient.post (Backend::Application.config.host + "/login"), opt
-      assert_equal true, JSON.parse(response)["success"]
-      
-      opt = {"guid" => u.id.to_s, "token" => u.token}
-      response = RestClient.post (Backend::Application.config.host + "/login"), opt
-      assert_equal true, JSON.parse(response)["success"]    
+    # (guid && token) auth
+    User.all.includes(:tokens).each do |u|
+      u.tokens.each do |t|
+        opt = {"guid" => u.id.to_s, "token" => t.token}
+        response = RestClient.post (Backend::Application.config.host + "/login"), opt
+        assert_equal true, JSON.parse(response)["success"]
+      end
     end
     
     # (login && password) auth

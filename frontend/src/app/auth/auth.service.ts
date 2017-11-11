@@ -65,7 +65,7 @@ export class AuthService {
           token: response['token'],
           fl_auth_page: true
         };
-        this.auth_client(params);
+        //this.auth_client(params);
       },
       error => {
         console.log(error);

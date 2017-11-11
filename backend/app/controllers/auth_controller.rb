@@ -19,32 +19,30 @@ class AuthController < ApplicationController
       :type => "login_error"
     }
     begin
-      user = User.any_of(
-        {
-          login: params[:login], 
-          token: params[:token]
-        }, 
-        {
-          _id: params[:guid] ? BSON::ObjectId(params[:guid]) : "", 
-          token: params[:token]
-        }
+      token = Token.where(
+        users_id: params[:guid] ? BSON::ObjectId(params[:guid]) : "",
+        token: params[:token]
       ).first
-      if(user) then
+      if(token) then
         res = {
           :success => true, 
           :type => "login_by_token",
-          :id => user['_id']
+          :id => token['users_id']
         }
       else
         user = User.where(login: params[:login]).first
         password = BCrypt::Password.new(user.encrypted_password)
         if(password == params[:password]) then
-          user.token = SecureRandom.urlsafe_base64(@len_token, false)
-          user.save(validate: false)
+          token = SecureRandom.urlsafe_base64(@len_token, false)
+          user.tokens.create(
+            token: token,
+            ip: request.remote_ip,
+            user_agent: request.user_agent
+          )
           res = {
             :success => true, 
             :type => "login_by_pass", 
-            :token => user.token,
+            :token => token,
             :id => user['_id']
           }
         end
@@ -63,8 +61,16 @@ class AuthController < ApplicationController
     if(count == 0) then
       encrypted_password = BCrypt::Password.create(params[:password]);
       token = SecureRandom.urlsafe_base64(@len_token, false)
-      user = User.new(login: params[:login], encrypted_password: encrypted_password, token: token)
+      user = User.new(
+        login: params[:login],
+        encrypted_password: encrypted_password
+      )
       user.save(validate: false)
+      user.tokens.create(
+        token: token,
+        ip: request.remote_ip,
+        user_agent: request.user_agent
+      )
       res = {
         :success => true,
         :type => "reg_by_loginpass",
