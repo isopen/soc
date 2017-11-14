@@ -1,5 +1,6 @@
 require 'bcrypt'
 
+# auth api
 class AuthController < ApplicationController
   attr_accessor :len_token
 
@@ -7,6 +8,9 @@ class AuthController < ApplicationController
     @len_token = 61
   end
 
+  # string guid
+  # string token
+  # return json
   def login_by_token(guid, token)
     token_is = Token.where(
       users_id: guid ? BSON::ObjectId(guid) : '',
@@ -32,6 +36,9 @@ class AuthController < ApplicationController
     }
   end
 
+  # string login
+  # string pass
+  # return json
   def login_by_pass(login, pass)
     user = User.where(login: login).first
     if user
@@ -72,6 +79,7 @@ class AuthController < ApplicationController
   # if need delete token (example: exit user)
   # string guid
   # string token
+  # return render-json
   def remove_token
     res = {
       success: false,
@@ -98,6 +106,7 @@ class AuthController < ApplicationController
   # string login
   # string password
   # string token
+  # return render-json
   def login
     res = {
       success: false,
@@ -117,6 +126,7 @@ class AuthController < ApplicationController
   # reg users
   # string login
   # string password
+  # return render-json
   def reg
     begin
       count = User.where(login: params[:login]).count
