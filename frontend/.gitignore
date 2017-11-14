@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 /.idea
+/src/assets/css/.sass-cache
