@@ -16,7 +16,7 @@ export class PageComponent implements OnInit {
   ) {}
   ngOnInit() {
     // TODO:: ???
-    var params = {
+    const params = {
       guid: this.activateRoute['url']['value'][1].path,
       token: localStorage.getItem('_token')
     };

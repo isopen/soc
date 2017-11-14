@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: '.wall_page',
   templateUrl: './wall.component.html'
 })
-export class WallComponent {
-}
+export class WallComponent {}

@@ -24,4 +24,4 @@ import { WallComponent } from './wall/wall.component';
     PageComponent
   ]
 })
-export class PageModule { }
+export class PageModule {}

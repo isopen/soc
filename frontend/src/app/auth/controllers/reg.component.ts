@@ -7,18 +7,18 @@ import { AuthService } from '../auth.service';
   selector: '.reg_form',
   templateUrl: '../views/reg.component.html'
 })
-export class RegComponent {
- 
+export class RegComponent implements OnInit {
+
   constructor(
     private authService: AuthService
   ) {}
- 
+
   ngOnInit(): void {}
-  
+
   reg(form: NgForm): void {
-    
+
     this.authService.reg_client(form);
-    
+
   }
-  
+
 }

@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: '.photo_page',
   templateUrl: './photo.component.html'
 })
-export class PhotoComponent {
-}
+export class PhotoComponent {}
