@@ -7,6 +7,9 @@ import { PhotoComponent } from './photo/photo.component';
 import { MenuComponent } from './menu/menu.component';
 import { WallComponent } from './wall/wall.component';
 
+import { AuthService } from '../auth/auth.service';
+import { PageService } from './page.service';
+
 @NgModule({
   imports: [
     FormsModule
@@ -18,7 +21,9 @@ import { WallComponent } from './wall/wall.component';
     WallComponent
   ],
   providers: [
-    CookieService
+    CookieService,
+    AuthService,
+    PageService
   ],
   bootstrap: [
     PageComponent

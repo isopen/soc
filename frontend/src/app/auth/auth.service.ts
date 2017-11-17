@@ -25,11 +25,11 @@ export class AuthService {
         guid: localStorage.getItem('_guid'),
         token: localStorage.getItem('_token')
       };
-      localStorage.removeItem('_guid');
-      localStorage.removeItem('_token');
       this.http.post(this.config.back_host + '/rem', params)
         .subscribe(
           response => {
+            localStorage.removeItem('_guid');
+            localStorage.removeItem('_token');
             resolve();
           },
           error => {
@@ -39,33 +39,38 @@ export class AuthService {
     });
   }
 
-  auth_client(params: Object): void {
-
-    this.http.post(this.config.back_host + '/login', params)
-    .subscribe(
-      response => {
-        console.log(response);
-        switch (response['type']) {
-          case 'login_by_pass':
-            this.set_session(response['id']['$oid'], response['token']);
-            if (params['fl_auth_page'] === true) {
-              this.router.navigateByUrl('/page/' + response['id']['$oid']);
+  auth_client(params: Object): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.config.back_host + '/login', params)
+        .subscribe(
+          response => {
+            console.log(response);
+            switch (response['type']) {
+              case 'login_by_pass':
+                this.set_session(response['id']['$oid'], response['token']);
+                if (params['fl_auth_page'] === true) {
+                  this.router.navigateByUrl('/page/' + response['id']['$oid']);
+                }
+                resolve();
+                break;
+              case 'login_by_token':
+                if (params['fl_auth_page'] === true) {
+                  this.router.navigateByUrl('/page/' + response['id']['$oid']);
+                }
+                resolve();
+                break;
+              case 'login_error':
+                this.remove_session();
+                reject();
+                break;
             }
-          break;
-          case 'login_by_token':
-            if (params['fl_auth_page'] === true) {
-              this.router.navigateByUrl('/page/' + response['id']['$oid']);
-            }
-          break;
-          case 'login_error':
-            this.remove_session();
-          break;
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+          },
+          error => {
+            reject();
+            console.log(error);
+          }
+        );
+    });
   }
 
   reg_client(form: NgForm): void {
