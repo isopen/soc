@@ -17,7 +17,8 @@ module Backend
       g.orm :mongoid
     end
     
-    config.host = "http://localhost:3000"
+    config.host = 'http://localhost:3000'
+    config.socket_host = 'ws://localhost:28080'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

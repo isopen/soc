@@ -18,7 +18,7 @@ export class PageService {
       guid: localStorage.getItem('_guid'),
       token: localStorage.getItem('_token')
     };
-    this.broadcaster.on<string>('ChatChannel')
+    this.broadcaster.on<string>(this.config.main_channel)
       .subscribe(
         response => {
           console.log(response);
@@ -26,7 +26,7 @@ export class PageService {
       );
     this.ng2cable.subscribe(
       this.config.back_ws_host + '/?guid=' + params['guid'] + '&token=' + params['token'],
-      'ChatChannel',
+      this.config.main_channel,
       params
     );
   }

@@ -1,4 +1,4 @@
-App.chat = App.cable.subscriptions.create { channel: "ChatChannel", room: "Best Room" },
+App.chat = App.cable.subscriptions.create { channel: "PageChannel", room: "Best Room" },
   connected: ->
     # Called when the subscription is ready for use on the server
 
