@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
-import { Ng2CableModule } from 'ng2-cable';
+import { NgXCableModule } from 'ngx-cable';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -19,7 +19,7 @@ import { ConfigService } from './app.config';
 @NgModule({
   imports: [
     BrowserModule,
-    Ng2CableModule,
+    NgXCableModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,

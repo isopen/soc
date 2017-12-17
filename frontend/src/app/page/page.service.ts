@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Ng2Cable, Broadcaster } from 'ng2-cable';
+import { NgXCable, Broadcaster } from 'ngx-cable';
 
 import { ConfigService } from '../app.config';
 
@@ -13,7 +13,7 @@ export class PageService {
 
   constructor(
     private config: ConfigService,
-    private ng2cable: Ng2Cable,
+    private ngcable: NgXCable,
     private broadcaster: Broadcaster
   ) {}
 
@@ -22,14 +22,14 @@ export class PageService {
     const guid = localStorage.getItem('_guid'),
           token = localStorage.getItem('_token');
 
-    this.broadcaster.on<string>(this.config.main_channel)
+    this.broadcaster.on(this.config.main_channel)
       .subscribe(
         response => {
           console.log(response);
         }
       );
 
-    this.ng2cable.setCable(
+    this.ngcable.setCable(
       this.config.back_ws_host + '/?guid=' + guid + '&token=' + token
     );
 
@@ -38,12 +38,12 @@ export class PageService {
       room: guid
     };
 
-    this.ng2cable.create(params);
+    this.ngcable.create(params);
 
     if (this.page_id !== guid) {
       params['channel'] = this.config.main_channel;
       params['room'] = this.page_id;
-      this.ng2cable.create(params);
+      this.ngcable.create(params);
     }
   }
 
