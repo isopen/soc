@@ -43,3 +43,4 @@ Thumbs.db
 
 /.idea
 /src/assets/css/.sass-cache
+package-lock.json
