@@ -39,6 +39,7 @@ export class PageService {
       params['room'] = this.page_id;
       this.config.ngcable.create(params);
     }
+
   }
 
 }
