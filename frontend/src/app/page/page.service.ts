@@ -4,7 +4,7 @@ import { ConfigService } from '../app.config';
 
 @Injectable()
 export class PageService {
-  
+
   public page_id = '';
 
   constructor(
