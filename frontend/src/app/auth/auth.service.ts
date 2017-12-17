@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgXCable } from 'ngx-cable';
 
 import { ConfigService } from '../app.config';
 
@@ -11,7 +12,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private config: ConfigService
+    private config: ConfigService,
+    private ngcable: NgXCable
   ) {}
 
   private set_session(id: string, token: string): void {
@@ -111,6 +113,7 @@ export class AuthService {
   exit_client(): void {
     this.remove_session().then(
       response => {
+        this.config.ngcable.disconnect();
         this.router.navigateByUrl('/');
       }
     );
