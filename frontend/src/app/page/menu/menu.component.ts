@@ -38,6 +38,8 @@ export class MenuComponent {
     if (this.router.url.indexOf(localStorage.getItem('_guid')) === -1) {
       this.config.ngcable.disconnect();
       this.router.navigateByUrl('/');
+    }else {
+      this.toggle_menu();
     }
   }
 
