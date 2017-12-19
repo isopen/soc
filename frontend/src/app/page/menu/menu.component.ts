@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../auth/auth.service';
 
@@ -12,6 +13,7 @@ export class MenuComponent {
   hamburder_icon_box = 'hamburder_icon_box';
 
   constructor(
+    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -27,6 +29,10 @@ export class MenuComponent {
 
   user_exit() {
     this.authService.exit_client();
+  }
+
+  user_home() {
+    this.router.navigateByUrl('/');
   }
 
 }

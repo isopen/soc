@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { NgXCable } from 'ngx-cable';
 
 import { ConfigService } from '../app.config';
 
@@ -12,8 +11,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private config: ConfigService,
-    private ngcable: NgXCable
+    private config: ConfigService
   ) {}
 
   private set_session(id: string, token: string): void {
