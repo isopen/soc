@@ -23,7 +23,7 @@ export class PageService {
         }
       );
 
-    this.config.ngcable.setCable(
+    this.config.ngcable.connect(
       this.config.back_ws_host + '/?guid=' + guid + '&token=' + token
     );
 
@@ -32,12 +32,12 @@ export class PageService {
       room: guid
     };
 
-    this.config.ngcable.create(params);
+    this.config.ngcable.subscribe(params);
 
     if (this.page_id !== guid) {
       params['channel'] = this.config.main_channel;
       params['room'] = this.page_id;
-      this.config.ngcable.create(params);
+      this.config.ngcable.subscribe(params);
     }
 
   }
