@@ -1,6 +1,20 @@
 {
-  "menu": {
+  "sign_in": {
+    "login": "Телефон или e-mail",
+    "password": "Пароль",
+    "button": "Войти"
+  },
+  "sign_out": {
+    "login": "Телефон или e-mail",
+    "password": "Пароль",
+    "re_password": "Подтверждение пароля",
+    "button": "Регистрация"
+  },
+  "hamburger_menu": {
     "my_page": "Моя страница",
-    "messages": "Сообщения"
+    "messages": "Сообщения",
+    "friends": "Друзья",
+    "settings": "Настройки",
+    "exit": "Выход"
   }
 }

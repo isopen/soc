@@ -13,7 +13,7 @@ export class PageComponent implements OnInit {
     private authService: AuthService,
     private pageService: PageService,
     private activateRoute: ActivatedRoute
-  ) {}
+  ) { }
   ngOnInit() {
     const params = {
       guid: localStorage.getItem('_guid'),

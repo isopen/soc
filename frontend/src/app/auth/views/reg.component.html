@@ -1,6 +1,6 @@
 <form #regForm="ngForm">
-  <input name="login" placeholder="Телефон или e-mail" ngModel />
-  <input name="password" type="password" placeholder="Пароль" ngModel />
-  <input name="repassword" type="password" placeholder="Подтверждение пароля" ngModel />
-  <button class="st_button" (click)="reg(regForm)">Регистрация</button>
+  <input name="login" placeholder="{{ 'sign_out.login' | translate }}" ngModel />
+  <input name="password" type="password" placeholder="{{ 'sign_out.password' | translate }}" ngModel />
+  <input name="repassword" type="password" placeholder="{{ 'sign_out.re_password' | translate }}" ngModel />
+  <button class="st_button" (click)="reg(regForm)">{{ 'sign_out.button' | translate }}</button>
 </form>

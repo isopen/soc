@@ -6,32 +6,27 @@
 <ul class="dropdown_menu" [hidden]="toggle_dropdown_menu">
   <li (click)="user_home()">
     <a>
-      Моя страница
+      {{ 'hamburger_menu.my_page' | translate }}
     </a>
   </li>
   <li>
     <a>
-      Сообщения
+      {{ 'hamburger_menu.messages' | translate }}
     </a>
   </li>
   <li>
     <a>
-      Друзья
+      {{ 'hamburger_menu.friends' | translate }}
     </a>
   </li>
   <li>
     <a>
-      Настройки
+      {{ 'hamburger_menu.settings' | translate }}
     </a>
   </li>
   <li (click)="user_exit()">
     <a>
-      Выход
+      {{ 'hamburger_menu.exit' | translate }}
     </a>
   </li>
 </ul>
-<!--<div class="menu">
-  <nav>
-
-  </nav>
-</div>-->

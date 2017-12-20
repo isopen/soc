@@ -1,5 +1,5 @@
 <form #loginForm="ngForm">
-  <input name="login" placeholder="Телефон или e-mail" ngModel />
-  <input name="password" type="password" placeholder="Пароль" ngModel />
-  <button class="st_button" (click)="login(loginForm)">Войти</button>
+  <input name="login" placeholder="{{ 'sign_in.login' | translate }}" ngModel />
+  <input name="password" type="password" placeholder="{{ 'sign_in.password' | translate }}" ngModel />
+  <button class="st_button" (click)="login(loginForm)">{{ 'sign_in.button' | translate }}</button>
 </form>
