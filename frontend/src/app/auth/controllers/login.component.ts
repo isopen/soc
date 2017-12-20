@@ -23,7 +23,11 @@ export class LoginComponent implements OnInit {
       fl_auth_page: true
     };
 
-    this.authService.auth_client(params);
+    this.authService.auth_client(params)
+      .catch(
+        error => function() {
+          console.log(error);
+        });
 
   }
 

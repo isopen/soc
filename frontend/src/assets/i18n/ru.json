@@ -1,11 +1,11 @@
 {
   "sign_in": {
-    "login": "Телефон или e-mail",
+    "login": "Номер телефона",
     "password": "Пароль",
     "button": "Войти"
   },
   "sign_out": {
-    "login": "Телефон или e-mail",
+    "login": "Номер телефона",
     "password": "Пароль",
     "re_password": "Подтверждение пароля",
     "button": "Регистрация"

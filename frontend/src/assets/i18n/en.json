@@ -1,11 +1,11 @@
 {
   "sign_in": {
-    "login": "Phone or e-mail",
+    "login": "Phone number",
     "password": "Password",
     "button": "Login"
   },
   "sign_out": {
-    "login": "Phone or e-mail",
+    "login": "Phone number",
     "password": "Password",
     "re_password": "Confirm password",
     "button": "Registration"
