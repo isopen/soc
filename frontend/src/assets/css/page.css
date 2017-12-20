@@ -19,10 +19,10 @@
   width: 200px; }
 
 .photo_page .avatar {
-  background-color: gray;
   min-width: 200px;
   max-width: 200px;
-  width: 200px; }
+  width: 200px;
+  min-height: 230px; }
 
 .avatar img {
   max-width: 200px; }
