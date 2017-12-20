@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,6 +18,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   imports: [
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

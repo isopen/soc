@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AuthComponent } from './auth.component';
@@ -15,6 +16,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   imports: [
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
