@@ -1,14 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgXCableModule } from 'ngx-cable';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 
@@ -27,7 +24,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     NgXCableModule,
     HttpClientModule,
-    FormsModule,
     AppRoutingModule,
     AuthModule,
     PageModule,
@@ -44,7 +40,6 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent
   ],
   providers: [
-    CookieService,
     ConfigService
   ],
   bootstrap: [

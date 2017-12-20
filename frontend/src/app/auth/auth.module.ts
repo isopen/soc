@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { CookieService } from 'ngx-cookie-service';
 
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './controllers/login.component';
@@ -18,7 +15,6 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
   imports: [
-    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -33,7 +29,6 @@ export function createTranslateLoader(http: HttpClient) {
     RegComponent
   ],
   providers: [
-    CookieService,
     AuthService
   ],
   bootstrap: [
