@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent {
   constructor(
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     this.authService.redirect_to_user_page();
   }

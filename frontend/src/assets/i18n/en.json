@@ -1,0 +1,20 @@
+{
+  "sign_in": {
+    "login": "Phone or e-mail",
+    "password": "Password",
+    "button": "Login"
+  },
+  "sign_out": {
+    "login": "Phone or e-mail",
+    "password": "Password",
+    "re_password": "Confirm password",
+    "button": "Registration"
+  },
+  "hamburger_menu": {
+    "my_page": "My page",
+    "messages": "Messages",
+    "friends": "Friends",
+    "settings": "Settings",
+    "exit": "Exit"
+  }
+}
