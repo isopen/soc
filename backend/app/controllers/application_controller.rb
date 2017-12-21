@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   def data_validation(func_type)
     case func_type
       when 'login'
-        def login_validation(gl, tp, type)
+        login_validation = lambda { |gl, tp, type|
           case type
             when 'gt'
               return !gl.is_a?(NilClass) &&
@@ -41,12 +41,12 @@ class ApplicationController < ActionController::API
                      gl.length <= @len_login &&
                      tp.length <= @len_password
             else
-              return false;
+              return false
           end
-        end
-        if login_validation(params[:guid], params[:token], 'gt')
+        }
+        if login_validation.call(params[:guid], params[:token], 'gt')
           return true
-        else if login_validation(params[:login], params[:password], 'lp')
+        else if login_validation.call(params[:login], params[:password], 'lp')
                return true
              else
                return false
