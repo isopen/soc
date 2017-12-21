@@ -2,11 +2,6 @@ require 'bcrypt'
 
 # auth api
 class AuthController < ApplicationController
-  attr_accessor :len_token
-
-  def initialize
-    @len_token = 61
-  end
 
   # string guid
   # string token
@@ -113,9 +108,11 @@ class AuthController < ApplicationController
       type: 'login_error'
     }
     begin
-      res = login_by_token(params[:guid], params[:token])
-      unless res[:success]
-        res = login_by_pass(params[:login], params[:password])
+      if self.data_validation('login')
+        res = login_by_token(params[:guid], params[:token])
+        unless res[:success]
+          res = login_by_pass(params[:login], params[:password])
+        end
       end
     rescue StandardError
       p $ERROR_INFO.inspect.to_s
