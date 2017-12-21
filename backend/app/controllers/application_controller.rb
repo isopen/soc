@@ -5,10 +5,16 @@ class ApplicationController < ActionController::API
   attr_accessor :len_password
 
   def initialize
+
     @len_guid = 25
     @len_token = 61
     @len_login = 20
     @len_password = 20
+
+    @len_token_min = 16
+    @len_login_min = 4
+    @len_password_min = 3
+
   end
 
   def data_validation(func_type)
@@ -17,9 +23,23 @@ class ApplicationController < ActionController::API
         def login_validation(gl, tp, type)
           case type
             when 'gt'
-              return !gl.is_a?(NilClass) && !tp.is_a?(NilClass) && gl.is_a?(String) && tp.is_a?(String) && !gl.empty? && !tp.empty? && gl.length <= @len_guid && tp.length <= (@len_token * 2)
+              return !gl.is_a?(NilClass) &&
+                     !tp.is_a?(NilClass) &&
+                     gl.is_a?(String) &&
+                     tp.is_a?(String) &&
+                     !gl.empty? &&
+                     !tp.empty? &&
+                     gl.length <= @len_guid &&
+                     tp.length <= (@len_token * 2)
             when 'lp'
-              return !gl.is_a?(NilClass) && !tp.is_a?(NilClass) && gl.is_a?(String) && tp.is_a?(String) && !gl.empty? && !tp.empty? && gl.length <= @len_login && tp.length <= @len_password
+              return !gl.is_a?(NilClass) &&
+                     !tp.is_a?(NilClass) &&
+                     gl.is_a?(String) &&
+                     tp.is_a?(String) &&
+                     !gl.empty? &&
+                     !tp.empty? &&
+                     gl.length <= @len_login &&
+                     tp.length <= @len_password
             else
               return false;
           end
