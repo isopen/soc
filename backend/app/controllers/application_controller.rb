@@ -4,6 +4,10 @@ class ApplicationController < ActionController::API
   attr_accessor :len_login
   attr_accessor :len_password
 
+  attr_accessor :len_token_min
+  attr_accessor :len_login_min
+  attr_accessor :len_password_min
+
   def initialize
 
     @len_guid = 25
@@ -30,7 +34,9 @@ class ApplicationController < ActionController::API
                      !gl.empty? &&
                      !tp.empty? &&
                      gl.length <= @len_guid &&
-                     tp.length <= (@len_token * 2)
+                     (tp_len = tp.length) &&
+                     tp_len >= @len_token_min &&
+                     tp_len <= (@len_token * 2)
             when 'lp'
               return !gl.is_a?(NilClass) &&
                      !tp.is_a?(NilClass) &&
@@ -38,8 +44,12 @@ class ApplicationController < ActionController::API
                      tp.is_a?(String) &&
                      !gl.empty? &&
                      !tp.empty? &&
-                     gl.length <= @len_login &&
-                     tp.length <= @len_password
+                     (gl_len = gl.length) &&
+                     gl_len >= @len_login_min &&
+                     gl_len <= @len_login &&
+                     (tp_len = tp.length) &&
+                     tp_len >= @len_password_min &&
+                     tp_len <= @len_password
             else
               return false
           end
