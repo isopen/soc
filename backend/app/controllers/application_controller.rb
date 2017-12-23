@@ -49,7 +49,8 @@ class ApplicationController < ActionController::API
                      gl_len <= @len_login &&
                      (tp_len = tp.length) &&
                      tp_len >= @len_password_min &&
-                     tp_len <= @len_password
+                     tp_len <= @len_password &&
+                     gl_len.match('^(\d([._]?)|[a-z]([._]?))+(?<![._])$')
             else
               return false
           end
