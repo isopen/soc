@@ -155,8 +155,8 @@ class AuthController < ApplicationController
         end
       else
         res = {
-            success: false,
-            type: 'reg_error'
+          success: false,
+          type: 'reg_error'
         }
       end
     rescue StandardError
