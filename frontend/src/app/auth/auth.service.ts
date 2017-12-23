@@ -76,7 +76,8 @@ export class AuthService {
   reg_client(form: NgForm): void {
     const params = {
       login: form.value.login,
-      password: form.value.password
+      password: form.value.password,
+      re_password: form.value.re_password
     };
     this.http.post(this.config.back_host + '/reg', params)
     .subscribe(

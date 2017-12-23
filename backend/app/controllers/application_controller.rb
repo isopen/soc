@@ -19,6 +19,8 @@ class ApplicationController < ActionController::API
     @len_login_min = 4
     @len_password_min = 3
 
+    @regex_login = /^(\d([._]?)|[a-z]([._]?))+(?<![._])$/
+
   end
 
   def data_validation(func_type)
@@ -47,10 +49,10 @@ class ApplicationController < ActionController::API
                      (gl_len = gl.length) &&
                      gl_len >= @len_login_min &&
                      gl_len <= @len_login &&
+                     @regex_login.match(gl) &&
                      (tp_len = tp.length) &&
                      tp_len >= @len_password_min &&
-                     tp_len <= @len_password &&
-                     /^(\d([._]?)|[a-z]([._]?))+(?<![._])$/.match(gl)
+                     tp_len <= @len_password
             else
               return false
           end
@@ -64,7 +66,34 @@ class ApplicationController < ActionController::API
              end
         end
       when 'reg'
-        return true
+        reg_validation = lambda { |l, p, pp|
+          return !l.is_a?(NilClass) &&
+                 !p.is_a?(NilClass) &&
+                 !pp.is_a?(NilClass) &&
+                 l.is_a?(String) &&
+                 p.is_a?(String) &&
+                 pp.is_a?(String) &&
+                 !l.empty? &&
+                 !p.empty? &&
+                 !pp.empty? &&
+                 (l_len = l.length) &&
+                 l_len >= @len_login_min &&
+                 l_len <= @len_login &&
+                 @regex_login.match(l) &&
+                 p == pp &&
+                 (p_len = p.length) &&
+                 p_len >= @len_password_min &&
+                 p_len <= @len_password &&
+                 (pp_len = pp.length) &&
+                 pp_len >= @len_password_min &&
+                 pp_len <= @len_password
+        }
+        p params['re_password']
+        if reg_validation.call(params['login'], params['password'], params['re_password'])
+          return true
+        else
+          return false
+        end
       else
         return false
     end

@@ -1,6 +1,6 @@
 <form #regForm="ngForm">
   <input name="login" placeholder="{{ 'sign_out.login' | translate }}" ngModel />
   <input name="password" type="password" placeholder="{{ 'sign_out.password' | translate }}" ngModel />
-  <input name="repassword" type="password" placeholder="{{ 'sign_out.re_password' | translate }}" ngModel />
+  <input name="re_password" type="password" placeholder="{{ 'sign_out.re_password' | translate }}" ngModel />
   <button class="st_button" (click)="reg(regForm)">{{ 'sign_out.button' | translate }}</button>
 </form>

@@ -126,30 +126,37 @@ class AuthController < ApplicationController
   # return render-json
   def reg
     begin
-      count = User.where(login: params[:login]).count
-      if count.zero?
-        encrypted_password = BCrypt::Password.create(params[:password])
-        token = SecureRandom.urlsafe_base64(@len_token, false)
-        user = User.new(
-          login: params[:login],
-          encrypted_password: encrypted_password
-        )
-        user.save(validate: false)
-        user.tokens.create(
-          token: token,
-          ip: request.remote_ip,
-          user_agent: request.user_agent
-        )
-        res = {
-          success: true,
-          type: 'reg_success',
-          id: user['_id'],
-          token: token
-        }
+      if self.data_validation('reg')
+        count = User.where(login: params[:login]).count
+        if count.zero?
+          encrypted_password = BCrypt::Password.create(params[:password])
+          token = SecureRandom.urlsafe_base64(@len_token, false)
+          user = User.new(
+            login: params[:login],
+            encrypted_password: encrypted_password
+          )
+          user.save(validate: false)
+          user.tokens.create(
+            token: token,
+            ip: request.remote_ip,
+            user_agent: request.user_agent
+          )
+          res = {
+            success: true,
+            type: 'reg_success',
+            id: user['_id'],
+            token: token
+          }
+        else
+          res = {
+            success: false,
+            type: 'reg_error'
+          }
+        end
       else
         res = {
-          success: false,
-          type: 'reg_error'
+            success: false,
+            type: 'reg_error'
         }
       end
     rescue StandardError
