@@ -34,7 +34,7 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
       thr << Thread.new(n) do |_i|
         1.times do
           s_rand = OpenSSL::Random.random_bytes(10).unpack('H*').join
-          opt = { 'login' => s_rand, 'password' => s_rand }
+          opt = { 'login' => s_rand, 'password' => s_rand, 're_password' => s_rand }
           response = RestClient.post (Backend::Application.config.host + '/reg'), opt
           assert_equal true, JSON.parse(response)['success']
         end

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
 
   def initialize
 
-    @len_guid = 25
+    @len_guid = 24
     @len_token = 61
     @len_login = 20
     @len_password = 20
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::API
                      tp.is_a?(String) &&
                      !gl.empty? &&
                      !tp.empty? &&
-                     gl.length <= @len_guid &&
+                     gl.length == @len_guid &&
                      (tp_len = tp.length) &&
                      tp_len >= @len_token_min &&
                      tp_len <= (@len_token * 2)
