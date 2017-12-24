@@ -1,6 +1,8 @@
 class User
   include Mongoid::Document
   has_many :tokens, dependent: :destroy
+  has_many :contacts, dependent: :destroy
+  has_many :dialogues, dependent: :destroy
 
   ## Database authenticatable
   field :email, type: String
@@ -21,9 +23,9 @@ class User
   field :last_sign_in_at,    type: Time
   field :current_sign_in_ip, type: String
   field :last_sign_in_ip,    type: String
-  
+
   def will_save_change_to_email?
     false
   end
-  
+
 end
