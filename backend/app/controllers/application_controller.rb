@@ -23,6 +23,11 @@ class ApplicationController < ActionController::API
 
   end
 
+  # validation of data
+  # string func_type
+  # 'login' - form of login
+  # 'reg' - form of registration
+  # return bool
   def data_validation(func_type)
     case func_type
       when 'login'
