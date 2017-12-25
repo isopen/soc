@@ -7,15 +7,19 @@ class AuthController < ApplicationController
   # string token
   # return json
   def login_by_token(guid, token)
-    token_is = Token.where(
+    token = Token.where(
       user_id: guid ? BSON::ObjectId(guid) : '',
       token: token
     ).first
-    if token_is
+    if token
+      token.update(
+       last_ip: token['ip'],
+       updated: Time.now
+      )
       return {
         success: true,
         type: 'login_by_token',
-        id: token_is['user_id']
+        id: token['user_id']
       }
     else
       return {
@@ -39,6 +43,7 @@ class AuthController < ApplicationController
     if user
       password = BCrypt::Password.new(user.encrypted_password)
       if password == pass
+        # TODO:: user has lost token
         token = SecureRandom.urlsafe_base64(@len_token, false)
         user.tokens.create(
           token: token,
@@ -139,6 +144,7 @@ class AuthController < ApplicationController
           user.tokens.create(
             token: token,
             ip: request.remote_ip,
+            last_ip: request.remote_ip,
             user_agent: request.user_agent
           )
           res = {
