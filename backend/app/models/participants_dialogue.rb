@@ -1,4 +1,4 @@
 class ParticipantsDialogue
   include Mongoid::Document
-  belongs_to :dialogues
+  belongs_to :dialogue
 end

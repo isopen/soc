@@ -8,14 +8,14 @@ class AuthController < ApplicationController
   # return json
   def login_by_token(guid, token)
     token_is = Token.where(
-      users_id: guid ? BSON::ObjectId(guid) : '',
+      user_id: guid ? BSON::ObjectId(guid) : '',
       token: token
     ).first
     if token_is
       return {
         success: true,
         type: 'login_by_token',
-        id: token_is['users_id']
+        id: token_is['user_id']
       }
     else
       return {
@@ -82,7 +82,7 @@ class AuthController < ApplicationController
     }
     begin
       Token.where(
-        users_id: params[:guid] ? BSON::ObjectId(params[:guid]) : '',
+        user_id: params[:guid] ? BSON::ObjectId(params[:guid]) : '',
         token: params[:token]
       ).delete
       res = {
