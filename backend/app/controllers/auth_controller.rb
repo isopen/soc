@@ -13,8 +13,8 @@ class AuthController < ApplicationController
     ).first
     if token
       token.update(
-       last_ip: token['ip'],
-       updated: Time.now
+        last_ip: token['ip'],
+        updated: Time.now
       )
       return {
         success: true,
