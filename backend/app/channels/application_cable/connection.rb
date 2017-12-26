@@ -25,8 +25,6 @@ module ApplicationCable
       end
     end
     def disconnect
-      # TODO:: token deactivation
-      p 'DISCONNECT'
       guid = request.params[:guid]
       token = request.params[:token]
       activation_token(guid, token, false)
