@@ -12,7 +12,13 @@ class AuthController < ApplicationController
       token: token
     ).first
     if token
+      # TODO:: Think about this
+      # If (ip && last_ip) && (user_agent && last_user_agent) are different,
+      # then delete the session and send the authorization error.
+      # Ask the user to log in with a username and password.
+      # Suspicion of the theft of the token by another user.
       token.update(
+        ip: request.remote_ip,
         last_ip: token['ip'],
         updated: Time.now
       )
@@ -43,7 +49,6 @@ class AuthController < ApplicationController
     if user
       password = BCrypt::Password.new(user.encrypted_password)
       if password == pass
-        # TODO:: user has lost token
         token = SecureRandom.urlsafe_base64(@len_token, false)
         user.tokens.create(
           token: token,
