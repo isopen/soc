@@ -18,10 +18,16 @@ module ApplicationCable
     # string guid
     # string token
     # bool active
-    def activation_token(guid, token, active)
+    private def activation_token(guid, token, active)
       User.where(_id: BSON::ObjectId(guid)).includes(:tokens).each do |u|
         u.tokens.each do |t|
-          t.update(active: active) if t['token'] == token
+          if t['token'] == token
+            if active
+              t.update(active: active)
+            else
+              t.update(active: active, completion_time: Time.now)
+            end
+          end
         end
       end
     end
