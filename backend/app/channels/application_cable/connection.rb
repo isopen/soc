@@ -1,9 +1,23 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
+
+    # user joined the socket
     def connect
       self.current_user = find_verified_user
     end
+
+    # user has disconnected from the socket
+    def disconnect
+      guid = request.params[:guid]
+      token = request.params[:token]
+      activation_token(guid, token, false)
+    end
+
+    # activation|deactivation of the session
+    # string guid
+    # string token
+    # bool active
     def activation_token(guid, token, active)
       User.where(_id: BSON::ObjectId(guid)).includes(:tokens).each do |u|
         u.tokens.each do |t|
@@ -11,6 +25,8 @@ module ApplicationCable
         end
       end
     end
+
+    # authorization of the user in the socket
     private def find_verified_user
       guid = request.params[:guid]
       token = request.params[:token]
@@ -23,11 +39,6 @@ module ApplicationCable
       else
         reject_unauthorized_connection
       end
-    end
-    def disconnect
-      guid = request.params[:guid]
-      token = request.params[:token]
-      activation_token(guid, token, false)
     end
   end
 end
