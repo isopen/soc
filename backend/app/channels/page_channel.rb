@@ -4,7 +4,6 @@ class PageChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # TODO:: token deactivation
   end
 
   def send_message(data)
