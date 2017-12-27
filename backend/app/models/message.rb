@@ -1,3 +1,4 @@
+# collection of messages users
 class Message
   include Mongoid::Document
   belongs_to :participants_dialogue

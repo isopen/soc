@@ -1,3 +1,4 @@
+# collection of dialogues users
 class Dialogue
   include Mongoid::Document
   belongs_to :user

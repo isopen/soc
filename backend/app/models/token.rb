@@ -1,3 +1,4 @@
+# collection of tokens
 class Token
   include Mongoid::Document
   belongs_to :user
