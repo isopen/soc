@@ -37,9 +37,11 @@ module ApplicationCable
       guid = request.params[:guid]
       token = request.params[:token]
       opt = { guid: guid, token: token }
-      # TODO:: add remote_ip
       headers = {
-        :'User-Agent' => request.user_agent
+        :'user-agent' => request.user_agent,
+        :'http_client_ip' => request.remote_ip,
+        :'remote_addr' => request.remote_ip,
+        :'x-forwarded-for' => request.remote_ip
       }
       response = RestClient.post Backend::Application.config.host + '/login', opt, headers
       response = JSON.parse(response)
