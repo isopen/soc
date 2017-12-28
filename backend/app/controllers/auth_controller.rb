@@ -7,6 +7,7 @@ class AuthController < ApplicationController
   # string token
   # return json
   def login_by_token(guid, token)
+    p request.user_agent
     token = Token.where(
       user_id: guid ? BSON::ObjectId(guid) : '',
       token: token
@@ -21,7 +22,7 @@ class AuthController < ApplicationController
         ip: request.remote_ip,
         last_ip: token['ip'],
         user_agent: request.user_agent,
-        last_user_agent: token['last_user_agent'],
+        last_user_agent: token['user_agent'],
         updated: Time.now
       )
       return {

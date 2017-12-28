@@ -37,7 +37,9 @@ module ApplicationCable
       guid = request.params[:guid]
       token = request.params[:token]
       opt = { guid: guid, token: token }
-      response = RestClient.post (Backend::Application.config.host + '/login'), opt
+      # TODO:: add remote_ip
+      headers = 'USER-AGENT:' + request.user_agent
+      response = RestClient.post Backend::Application.config.host + '/login', opt, headers
       response = JSON.parse(response)
       if response['success']
         activation_token(guid, token, true)
