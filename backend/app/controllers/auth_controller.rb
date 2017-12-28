@@ -55,11 +55,16 @@ class AuthController < ApplicationController
           ip: request.remote_ip,
           user_agent: request.user_agent
         )
+        roles = []
+        user.connect_roles.each do |r|
+          roles.push(r['id_role'])
+        end
         return {
           success: true,
           type: 'login_by_pass',
           token: token,
-          id: user['_id']
+          id: user['_id'],
+          roles: roles
         }
       else
         return {
@@ -151,6 +156,9 @@ class AuthController < ApplicationController
             ip: request.remote_ip,
             last_ip: request.remote_ip,
             user_agent: request.user_agent
+          )
+          user.connect_roles.create(
+            id_role: 1
           )
           res = {
             success: true,

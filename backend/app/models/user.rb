@@ -25,9 +25,4 @@ class User
   field :last_sign_in_at,    type: Time
   field :created, type: Time, default: Time.now
   field :updated, type: Time, default: Time.now
-
-  def will_save_change_to_email?
-    false
-  end
-
 end
