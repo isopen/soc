@@ -7,7 +7,6 @@ class AuthController < ApplicationController
   # string token
   # return json
   def login_by_token(guid, token)
-    p request.user_agent
     token = Token.where(
       user_id: guid ? BSON::ObjectId(guid) : '',
       token: token
