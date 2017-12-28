@@ -12,14 +12,16 @@ class AuthController < ApplicationController
       token: token
     ).first
     if token
-      # TODO:: Think about this
-      # If (ip && last_ip) && (user_agent && last_user_agent) are different,
-      # then delete the session and send the authorization error.
-      # Ask the user to log in with a username and password.
-      # Suspicion of the theft of the token by another user.
+      # TODO:: Think about it
+      if request.remote_ip != token['last_ip'] && request.user_agent != token['last_user_agent']
+        token.delete
+        return false
+      end
       token.update(
         ip: request.remote_ip,
         last_ip: token['ip'],
+        user_agent: request.user_agent,
+        last_user_agent: token['last_user_agent'],
         updated: Time.now
       )
       return {
@@ -53,7 +55,9 @@ class AuthController < ApplicationController
         user.tokens.create(
           token: token,
           ip: request.remote_ip,
-          user_agent: request.user_agent
+          last_ip: request.remote_ip,
+          user_agent: request.user_agent,
+          last_user_agent: request.user_agent
         )
         roles = []
         user.roles.each do |r|
@@ -155,9 +159,10 @@ class AuthController < ApplicationController
             token: token,
             ip: request.remote_ip,
             last_ip: request.remote_ip,
-            user_agent: request.user_agent
+            user_agent: request.user_agent,
+            last_user_agent: request.user_agent
           )
-          user.connect_roles.create(
+          user.roles.create(
             id_role: 1
           )
           res = {
