@@ -1,7 +1,7 @@
 # collection of users
 class User
   include Mongoid::Document
-  has_many :connect_roles, dependent: :destroy
+  has_many :roles, dependent: :destroy
   has_many :tokens, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :dialogues, dependent: :destroy

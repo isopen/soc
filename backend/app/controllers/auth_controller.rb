@@ -56,7 +56,7 @@ class AuthController < ApplicationController
           user_agent: request.user_agent
         )
         roles = []
-        user.connect_roles.each do |r|
+        user.roles.each do |r|
           roles.push(r['id_role'])
         end
         return {
