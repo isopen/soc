@@ -15,7 +15,11 @@ class AuthController < ApplicationController
       # TODO:: Think about it
       if request.remote_ip != token['last_ip'] && request.user_agent != token['last_user_agent']
         token.delete
-        return false
+        return {
+            success: false,
+            type: 'login_error',
+            transcript: 'hack_token'
+        }
       end
       token.update(
         ip: request.remote_ip,
@@ -32,14 +36,16 @@ class AuthController < ApplicationController
     else
       return {
         success: false,
-        type: 'login_error'
+        type: 'login_error',
+        transcript: 'no_token_found'
       }
     end
   rescue StandardError
     p $ERROR_INFO.inspect.to_s
     return {
       success: false,
-      type: 'login_error'
+      type: 'login_error',
+      transcript: 'oops_something_went_wrong'
     }
   end
 
@@ -73,20 +79,23 @@ class AuthController < ApplicationController
       else
         return {
           success: false,
-          type: 'login_error'
+          type: 'login_error',
+          transcript: 'incorrect_password'
         }
       end
     else
       return {
         success: false,
-        type: 'login_error'
+        type: 'login_error',
+        transcript: 'user_is_not_found'
       }
     end
   rescue StandardError
     p $ERROR_INFO.inspect.to_s
     return {
       success: false,
-      type: 'login_error'
+      type: 'login_error',
+      transcript: 'oops_something_went_wrong'
     }
   end
 
@@ -97,7 +106,8 @@ class AuthController < ApplicationController
   def remove_token
     res = {
       success: false,
-      type: 'remove_token_error'
+      type: 'remove_token_error',
+      transcript: 'oops_something_went_wrong'
     }
     begin
       Token.where(
@@ -124,7 +134,8 @@ class AuthController < ApplicationController
   def login
     res = {
       success: false,
-      type: 'login_error'
+      type: 'login_error',
+      transcript: 'oops_something_went_wrong'
     }
     begin
       if self.data_validation('login')
@@ -132,6 +143,12 @@ class AuthController < ApplicationController
         unless res[:success]
           res = login_by_pass(params[:login], params[:password])
         end
+      else
+        res = {
+            success: false,
+            type: 'login_error',
+            transcript: 'validation error'
+        }
       end
     rescue StandardError
       p $ERROR_INFO.inspect.to_s
@@ -174,20 +191,23 @@ class AuthController < ApplicationController
         else
           res = {
             success: false,
-            type: 'reg_error'
+            type: 'reg_error',
+            transcript: 'user_exists'
           }
         end
       else
         res = {
           success: false,
-          type: 'reg_error'
+          type: 'reg_error',
+          transcript: 'validation error'
         }
       end
     rescue StandardError
       p $ERROR_INFO.inspect.to_s
       res = {
         success: false,
-        type: 'reg_error'
+        type: 'reg_error',
+        transcript: 'oops_something_went_wrong'
       }
     end
     render json: res
