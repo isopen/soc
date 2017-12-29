@@ -56,26 +56,27 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
       assert_equal false, JSON.parse(response)['success']
     end
 
+    # (login && password) auth
+    opt = { 'login' => 'test1', 'password' => 'test' }
+    response = RestClient.post (Backend::Application.config.host + '/login'), opt
+    assert_equal true, JSON.parse(response)['success']
+  end
+
+  test 'theft_token' do
     # theft of the token from the user's side
     User.all.includes(:tokens).each do |u|
       u.tokens.each do |t|
         opt = { 'guid' => u.id.to_s, 'token' => t.token}
         headers = {
-          :'user-agent' => 'brutal user',
-          :'http_client_ip' => '0.0.0.0',
-          :'remote_addr' => '0.0.0.0',
-          :'x-forwarded-for' => '0.0.0.0'
+            :'user-agent' => 'brutal user',
+            :'http_client_ip' => '0.0.0.0',
+            :'remote_addr' => '0.0.0.0',
+            :'x-forwarded-for' => '0.0.0.0'
         }
         response = RestClient.post Backend::Application.config.host + '/login', opt, headers
-        p JSON.parse(response)
         assert_equal false, JSON.parse(response)['success']
       end
     end
-
-    # (login && password) auth
-    opt = { 'login' => 'test1', 'password' => 'test' }
-    response = RestClient.post (Backend::Application.config.host + '/login'), opt
-    assert_equal true, JSON.parse(response)['success']
   end
 
   test 'auth_reg' do
