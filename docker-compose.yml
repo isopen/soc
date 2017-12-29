@@ -16,3 +16,13 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
+
+  sock:
+    build: ./backend
+    command: bundle exec puma -p 28080 cable/config.ru
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "28080:28080"
+    depends_on:
+      - mongodb
