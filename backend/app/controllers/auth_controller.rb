@@ -12,7 +12,6 @@ class AuthController < ApplicationController
       token: token
     ).first
     if token
-      # TODO:: Think about it
       if request.remote_ip != token['last_ip'] && request.user_agent != token['last_user_agent']
         token.delete
         return {
