@@ -139,7 +139,7 @@ class AuthController < ApplicationController
     begin
       if self.data_validation('login')
         res = login_by_token(params[:guid], params[:token])
-        unless res[:success]
+        if !res[:success] && res[:transcript] == 'no_token_found'
           res = login_by_pass(params[:login], params[:password])
         end
       else
