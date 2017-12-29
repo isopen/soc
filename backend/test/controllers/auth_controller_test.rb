@@ -21,6 +21,26 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
+    # (non-existent guid and/or non-existent token)
+    p = 10
+    User.all.includes(:tokens).each_with_index do |u, i|
+      response = {}
+      if i < p
+        opt = { 'guid' => u.id.to_s, 'token' => (srand 1234).to_s}
+        response = RestClient.post (Backend::Application.config.host + '/login'), opt
+      else if i < (p * 2)
+             opt = { 'guid' => (srand 1234).to_s, 'token' => (srand 1234).to_s}
+             response = RestClient.post (Backend::Application.config.host + '/login'), opt
+           else
+             u.tokens.each do |t|
+               opt = { 'guid' => (srand 1234).to_s, 'token' => t.token}
+               response = RestClient.post (Backend::Application.config.host + '/login'), opt
+             end
+           end
+      end
+      assert_equal false, JSON.parse(response)['success']
+    end
+
     # (login && password) auth
     opt = { 'login' => 'test1', 'password' => 'test' }
     response = RestClient.post (Backend::Application.config.host + '/login'), opt
