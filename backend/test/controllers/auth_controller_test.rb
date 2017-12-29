@@ -21,7 +21,7 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
       end
     end
 
-    # (non-existent guid and/or non-existent token)
+    # (non-existent guid and/or non-existent token) auth
     p = 10
     User.all.includes(:tokens).each_with_index do |u, i|
       response = {}
@@ -38,6 +38,21 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
              end
            end
       end
+      assert_equal false, JSON.parse(response)['success']
+    end
+
+    # (nil guid and/or nil token) auth
+    User.all.includes(:tokens).each do |u|
+      opt = { 'guid' => u.id.to_s, 'token' => nil}
+      response = RestClient.post (Backend::Application.config.host + '/login'), opt
+      assert_equal false, JSON.parse(response)['success']
+      u.tokens.each do |t|
+        opt = { 'guid' => nil, 'token' => t.token}
+        response = RestClient.post (Backend::Application.config.host + '/login'), opt
+        assert_equal false, JSON.parse(response)['success']
+      end
+      opt = { 'guid' => nil, 'token' => nil}
+      response = RestClient.post (Backend::Application.config.host + '/login'), opt
       assert_equal false, JSON.parse(response)['success']
     end
 
