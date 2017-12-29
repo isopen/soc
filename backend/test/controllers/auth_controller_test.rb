@@ -3,6 +3,8 @@ require 'openssl'
 
 class AuthControllerTest < ActionDispatch::IntegrationTest
 
+  # -n function
+
   test 'auth_login' do
     # parameters for forming combinations
     opt = [{ 'login' => '' }, { 'token' => '' }, { 'password' => '' }, { 'guid' => '' }]
@@ -62,6 +64,8 @@ class AuthControllerTest < ActionDispatch::IntegrationTest
     assert_equal true, JSON.parse(response)['success']
   end
 
+  # an article about this
+  # https://medium.com/@mrmakss635/auth-without-data-entry-and-sms-b88afa9ef7c7
   test 'theft_token' do
     # theft of the token from the user's side
     User.all.includes(:tokens).each do |u|
