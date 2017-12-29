@@ -7,12 +7,12 @@ RUN apk add --update tzdata && \
 RUN apk add --update --virtual runtime-deps nodejs libffi-dev readline sqlite sqlite-dev
 
 WORKDIR /tmp
-ADD /backend/Gemfile* ./
+ADD /Gemfile* ./
 
 RUN apk add --virtual build-deps build-base openssl-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
     bundle install --jobs=2 && \
     apk del build-deps
 
 ENV APP_HOME /backend
-COPY /backend $APP_HOME
+COPY / $APP_HOME
 WORKDIR $APP_HOME
