@@ -150,7 +150,7 @@ test:
     default:
       database: bang
       hosts:
-        - localhost:27017
+        - mongodb:27017
       options:
         read:
           mode: :primary

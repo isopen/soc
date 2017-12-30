@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   mongodb:
     image: mongo:latest
@@ -7,6 +7,12 @@ services:
       - ./databases/mongodb:/databases/mongodb
     ports:
       - 27017:27017
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - './databeses/redis:/databases/redis'
+    ports:
+      - 6379:6379
   web:
     build: ./backend
     command: rails s -p 3000 -b '0.0.0.0'
@@ -16,7 +22,7 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
-
+      - sock
   sock:
     build: ./backend
     command: bundle exec puma -p 28080 cable/config.ru
@@ -26,3 +32,4 @@ services:
       - "28080:28080"
     depends_on:
       - mongodb
+      - redis
