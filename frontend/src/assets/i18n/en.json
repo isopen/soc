@@ -16,5 +16,8 @@
     "friends": "Contacts",
     "settings": "Settings",
     "exit": "Exit"
+  },
+  "wall": {
+    "rich_placeholder": "Write a message..."
   }
 }
