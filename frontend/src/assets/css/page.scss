@@ -121,12 +121,15 @@
 }
 
 .composer_rich_textarea {
+  position: relative;
+  word-wrap: break-word;
   box-shadow: 0 1px 0 0 #e8e8e8;
-  min-height: 40px;
+  min-height: 30px;
   width: 200px;
   border: 0;
   outline: none;
   padding: 0 5px 0 5px;
+  margin: 10px 0 10px 0;
 }
 
 .composer_rich_textarea textarea {
@@ -139,8 +142,51 @@
   box-shadow: 0 2px 0 0 #77b7e4;
 }
 
-.composer_rich_textarea[contenteditable=true]:empty:before{
+.composer_rich_textarea[contenteditable=true]:empty:before {
   content: attr(placeholder);
   color: #9aa2ab;
   display: block;
+}
+
+.im_history_wrap {
+  position: relative;
+  word-wrap: break-word;
+  max-height: 400px;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.im_content_message_wrap {
+  margin: 8px 10px 8px 16px;
+}
+
+.im_message_wrap {
+  position: relative;
+  padding: 5px;
+}
+
+.im_message_body {
+  overflow: hidden;
+}
+
+.im_message_from_photo {
+  margin: 0 15px 0 0;
+}
+
+.im_message_from_photo img {
+  width: 42px;
+  height: 42px;
+  border-radius: 3px;
+}
+
+.im_message_author {
+  color: #3a6d99;
+  font-weight: bold;
+}
+
+.im_message_date {
+  color: #adadad;
+  font-size: 11px;
+  padding: 0 0 20px 10px;
 }
