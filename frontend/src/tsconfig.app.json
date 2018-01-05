@@ -9,5 +9,10 @@
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
+  ],
+  "include": [
+    "../node_modules/ngx-cable/index.ts",
+    "main.ts",
+    "polyfills.ts"
   ]
 }
