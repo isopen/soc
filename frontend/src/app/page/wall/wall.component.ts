@@ -1,4 +1,5 @@
-import { Directive, Renderer2, Component, ElementRef, OnInit } from '@angular/core';
+import { Renderer2, Component, ElementRef, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: '.wall_page',
@@ -10,7 +11,7 @@ export class WallComponent implements OnInit {
 
     for (let i = 0; i < 10; i++) {
       const data = {
-        text: this.renderer.createText('test'),
+        text: this.renderer.createText('testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'),
         date: this.renderer.createText('03.01.2018 PM'),
         author: this.renderer.createText('Max'),
         photo: 'http://3.bp.blogspot.com/_yzU-EquWSV4/S6u8WV0N6WI/AAAAAAAAAHY/ruyngvr9YP0/s200/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA2.PNG'
@@ -18,6 +19,10 @@ export class WallComponent implements OnInit {
       this.gen_im_message_wrap(data, 1);
     }
 
+  }
+
+  send_to_wall(form: NgForm): void {
+    console.log(form.value.message);
   }
 
   gen_im_message_wrap(data, type): void {
@@ -46,6 +51,7 @@ export class WallComponent implements OnInit {
     this.renderer.addClass(im_message_author, 'im_message_author');
     this.renderer.addClass(im_message, 'im_message');
     this.renderer.addClass(im_message_text, 'im_message_text');
+
     this.renderer.appendChild(im_message_wrap, im_content_message_wrap);
 
     this.renderer.setAttribute(m_photo, 'src', data['photo']);
