@@ -16,13 +16,6 @@ export class PageService {
     const guid = localStorage.getItem('_guid'),
           token = localStorage.getItem('_token');
 
-    this.config.broadcaster.on(this.config.main_channel)
-      .subscribe(
-        response => {
-          console.log(response);
-        }
-      );
-
     this.config.ngcable.connect(
       this.config.back_ws_host + '/?guid=' + guid + '&token=' + token
     );
@@ -40,6 +33,10 @@ export class PageService {
       this.config.ngcable.subscribe(params);
     }
 
+  }
+
+  public send_to_wall(data): void {
+    this.config.ngcable.perform('send_to_wall', data);
   }
 
 }

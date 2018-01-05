@@ -14,9 +14,9 @@ class PageChannel < ApplicationCable::Channel
     )
   end
 
-  def send_message_to_wall(data)
+  def send_to_wall(data)
     ActionCable.server.broadcast(
-        data['user_id'],
+        data['room'],
         type: 'update_wall',
         message: data['message']
     )
