@@ -3,11 +3,17 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UtilsService {
   constructor() {}
-  /*
-    date and time formatting function
-    TODO:: rewrite function to format as in telegram
-   */
+  public static get_counts_of_digits(d: number): number {
+    return d.toString().length;
+  }
+  public static ref_format_of_digits(d: number): string|number {
+    return UtilsService.get_counts_of_digits(d) === 1 ? ('0' + d) : d;
+  }
   public static date_time_format(timestamp): string {
-    return new Date(parseInt(timestamp.toString(), 10)).toString();
+    const dt = new Date(parseInt(timestamp.toString(), 10)),
+          hours: string|number = UtilsService.ref_format_of_digits(dt.getHours()),
+          minutes: string|number = UtilsService.ref_format_of_digits(dt.getMinutes()),
+          seconds: string|number = UtilsService.ref_format_of_digits(dt.getSeconds());
+    return hours + ':' + minutes + ':' + seconds;
   }
 }
