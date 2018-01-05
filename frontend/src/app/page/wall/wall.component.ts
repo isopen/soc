@@ -22,7 +22,6 @@ export class WallComponent implements OnInit {
         response => {
           switch (response.type) {
             case 'update_wall':
-              console.log(response.message);
               this.gen_im_message_wrap(response, '.im_message_history_wrap', 1);
               break;
           }
@@ -104,7 +103,11 @@ export class WallComponent implements OnInit {
 
     const im_message_history_wrap = this.el.nativeElement.querySelector(selector);
 
-    this.renderer.appendChild(im_message_history_wrap, im_message_wrap);
+    if (im_message_history_wrap.children.length > 0) {
+      this.renderer.insertBefore(im_message_history_wrap, im_message_wrap, im_message_history_wrap.children[0]);
+    }else {
+      this.renderer.appendChild(im_message_history_wrap, im_message_wrap);
+    }
 
   }
 
