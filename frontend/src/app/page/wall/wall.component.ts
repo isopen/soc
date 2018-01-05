@@ -1,4 +1,4 @@
-import { Renderer2, Component, ElementRef, OnInit } from '@angular/core';
+import { Renderer2, Component, ElementRef, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,22 +7,22 @@ import { NgForm } from '@angular/forms';
 })
 export class WallComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
-  ngOnInit() {
+  ngOnInit() {}
 
-    for (let i = 0; i < 10; i++) {
+  send_to_wall(form: NgForm): void {
+
+    const msg = this.el.nativeElement.querySelector('.composer_rich_textarea').textContent;
+    if (msg !== '') {
+      const dt = Date.now();
       const data = {
-        text: this.renderer.createText('testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest'),
-        date: this.renderer.createText('03.01.2018 PM'),
+        text: this.renderer.createText(msg),
+        date: this.renderer.createText(new Date(parseInt(dt.toString(), 10)).toString()),
         author: this.renderer.createText('Max'),
         photo: 'http://3.bp.blogspot.com/_yzU-EquWSV4/S6u8WV0N6WI/AAAAAAAAAHY/ruyngvr9YP0/s200/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA2.PNG'
       };
       this.gen_im_message_wrap(data, 1);
     }
 
-  }
-
-  send_to_wall(form: NgForm): void {
-    console.log(form.value.message);
   }
 
   gen_im_message_wrap(data, type): void {
