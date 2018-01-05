@@ -1,6 +1,7 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     identified_by :current_user
+    identified_by :token_user
 
     # user joined the socket
     def connect
@@ -47,6 +48,7 @@ module ApplicationCable
       response = JSON.parse(response)
       if response['success']
         activation_token(guid, token, true)
+        self.token_user = token
         response['id']['$oid']
       else
         reject_unauthorized_connection

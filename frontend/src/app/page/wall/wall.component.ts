@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { PageService } from '../page.service';
 import { ConfigService } from '../../app.config';
+import { UtilsService } from '../../utils/app.utils';
 
 @Component({
   selector: '.wall_page',
@@ -20,9 +21,13 @@ export class WallComponent implements OnInit {
     this.config.broadcaster.on(this.config.main_channel)
       .subscribe(
         response => {
+          const token = localStorage.getItem('_token');
           switch (response.type) {
             case 'update_wall':
-              this.gen_im_message_wrap(response, '.im_message_history_wrap', 1);
+              // fulfilled. but not the fact that it is read
+              if (response.token !== token) {
+                this.gen_im_message_wrap(response, '.im_message_history_wrap', 1);
+              }
               break;
           }
         }
@@ -32,7 +37,8 @@ export class WallComponent implements OnInit {
 
   send_to_wall(form: NgForm): void {
 
-    const msg = this.el.nativeElement.querySelector('.composer_rich_textarea').textContent;
+    const div_textarea = this.el.nativeElement.querySelector('.composer_rich_textarea'),
+          msg = div_textarea.textContent;
     if (msg !== '') {
       const dt = Date.now();
       const data = {
@@ -44,8 +50,10 @@ export class WallComponent implements OnInit {
           photo: 'http://3.bp.blogspot.com/_yzU-EquWSV4/S6u8WV0N6WI/AAAAAAAAAHY/ruyngvr9YP0/s200/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA2.PNG'
         }
       };
+      div_textarea.textContent = '';
       this.pageService.send_to_wall(data);
-
+      // pending
+      this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
     }
 
   }
@@ -53,7 +61,7 @@ export class WallComponent implements OnInit {
   gen_im_message_wrap(data, selector, type): void {
 
     data.message.text = this.renderer.createText(data.message.text);
-    data.message.date = this.renderer.createText(new Date(parseInt(data.message.date.toString(), 10)).toString());
+    data.message.date = this.renderer.createText(UtilsService.date_time_format(data.message.date));
     data.message.author = this.renderer.createText(data.message.author);
 
     const im_message_wrap = this.renderer.createElement('div'),
