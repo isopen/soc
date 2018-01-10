@@ -8,7 +8,7 @@
   padding: 0 0 0 20px;
   border-left: 1px solid #e3e4e8;
   overflow-y: hidden;
-  min-height: 300px;
+  min-height: 700px;
 }
 
 .body_page .container:nth-child(1) {
@@ -151,10 +151,7 @@
 .im_history_wrap {
   position: relative;
   word-wrap: break-word;
-  max-height: 250px;
   max-width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .im_content_message_wrap {
