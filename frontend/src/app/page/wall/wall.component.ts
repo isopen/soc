@@ -25,7 +25,7 @@ export class WallComponent implements OnInit {
           switch (response.type) {
             case 'update_wall':
               // fulfilled. but not the fact that it is read
-              if (response.token !== token && response.wall_id === this.pageService.page_id) {
+              if (response.token !== token && response.page_id === this.pageService.page_id) {
                 this.gen_im_message_wrap(response, '.im_message_history_wrap', 1);
               }
               break;

@@ -18,7 +18,7 @@ class PageChannel < ApplicationCable::Channel
     ActionCable.server.broadcast(
         data['room'],
         token: self.token_user,
-        wall_id: data['room'],
+        page_id: data['room'],
         type: 'update_wall',
         message: data['message']
     )
