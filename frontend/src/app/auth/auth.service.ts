@@ -112,6 +112,7 @@ export class AuthService {
   exit_client(): void {
     this.remove_session().then(
       response => {
+        this.config.broadcaster.off();
         this.config.ngcable.disconnect();
         this.router.navigateByUrl('/');
       }
