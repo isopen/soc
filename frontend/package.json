@@ -27,7 +27,7 @@
     "core-js": "^2.5.3",
     "ngx-cable": "^1.1.9",
     "rxjs": "^5.5.6",
-    "zangodb": "^1.0.7",
+    "zangodb": "1.0.7",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
