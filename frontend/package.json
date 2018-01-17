@@ -21,13 +21,13 @@
     "@angular/platform-browser": "5.1.1",
     "@angular/platform-browser-dynamic": "5.1.1",
     "@angular/router": "5.1.1",
-    "@ngx-translate/core": "^9.0.2",
+    "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "actioncable": "^5.1.4",
     "core-js": "^2.5.3",
-    "ngx-cable": "^1.1.8",
+    "ngx-cable": "^1.1.9",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.20"
   },
   "devDependencies": {
     "@angular/cli": "1.6.1",
