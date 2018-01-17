@@ -35,8 +35,14 @@ export class PageService {
 
   }
 
-  public send_to_wall(data): boolean {
-    return this.config.ngcable.perform('send_to_wall', data);
+  public send(action, data): Promise<{}> {
+    return new Promise((resolve, reject) => {
+      if (this.config.ngcable.perform(action, data)) {
+        resolve();
+      }else {
+        reject();
+      }
+    });
   }
 
 }
