@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UtilsService {
   constructor() {}
+  // TODO:: planing. can be moved to a separate class and improved
   public static get_counts_of_digits(d: number): number {
     return d.toString().length;
   }

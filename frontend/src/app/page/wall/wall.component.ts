@@ -41,6 +41,7 @@ export class WallComponent implements OnInit {
           msg = div_textarea.textContent;
     if (msg !== '') {
       const dt = Date.now();
+      const action = 'send_to_wall';
       const data = {
         room: this.pageService.page_id,
         message: {
@@ -51,10 +52,10 @@ export class WallComponent implements OnInit {
         }
       };
       div_textarea.textContent = '';
-      this.pageService.send('send_to_wall', data)
+      this.pageService.send(action, data)
         .catch(
           () => {
-            // send to collection unsent_messages
+            this.config.unsent_messages.insert([{action: action, data: JSON.stringify(data)}]);
           }
         );
       // pending
