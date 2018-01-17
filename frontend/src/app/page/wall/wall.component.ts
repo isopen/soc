@@ -53,13 +53,18 @@ export class WallComponent implements OnInit {
       };
       div_textarea.textContent = '';
       this.pageService.send(action, data)
+        .then(
+          () => {
+            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
+          }
+        )
         .catch(
           () => {
+            // TODO:: to think over common service
             this.config.unsent_messages.insert([{action: action, data: JSON.stringify(data)}]);
+            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
           }
         );
-      // pending
-      this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
     }
 
   }
