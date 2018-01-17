@@ -35,8 +35,8 @@ export class PageService {
 
   }
 
-  public send_to_wall(data): void {
-    this.config.ngcable.perform('send_to_wall', data);
+  public send_to_wall(data): boolean {
+    return this.config.ngcable.perform('send_to_wall', data);
   }
 
 }
