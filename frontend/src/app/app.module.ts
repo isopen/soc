@@ -29,7 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthModule,
     PageModule,
     NotModule,
-    ServiceWorkerModule.register('assets/soc-worker.js'),
+    ServiceWorkerModule.register('assets/workers/soc-worker.js'),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
