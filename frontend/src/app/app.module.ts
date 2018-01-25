@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgXCableModule } from 'ngx-cable';
@@ -28,6 +29,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthModule,
     PageModule,
     NotModule,
+    ServiceWorkerModule.register('assets/soc-worker.js'),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
