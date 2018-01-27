@@ -1,6 +1,5 @@
 import { Renderer2, Component, ElementRef, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { PageService } from '../page.service';
 import { ConfigService } from '../../app.config';
@@ -12,7 +11,6 @@ import { UtilsService } from '../../utils/app.utils';
 })
 export class WallComponent implements OnInit {
   constructor(
-    private router: Router,
     private renderer: Renderer2,
     private el: ElementRef,
     private pageService: PageService,
@@ -71,11 +69,6 @@ export class WallComponent implements OnInit {
 
   }
 
-  transition_to_wall(guid: string): void {
-    this.router.navigateByUrl('/page/' + guid);
-    // TODO:: reloading modules relative to url
-  }
-
   gen_im_message_wrap(data, selector, type): void {
 
     data.message.text = this.renderer.createText(data.message.text);
@@ -119,7 +112,7 @@ export class WallComponent implements OnInit {
 
     this.renderer.appendChild(im_message_author, data.message.author);
     this.renderer.listen(im_message_author, 'click', (event) => {
-      this.transition_to_wall(data.message.author.textContent);
+      this.pageService.transition_to_wall(data.message.author.textContent);
     });
     this.renderer.appendChild(im_message_author_wrap, im_message_author);
     this.renderer.appendChild(im_message_body, im_message_author_wrap);

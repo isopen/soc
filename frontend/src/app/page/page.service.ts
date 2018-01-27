@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ConfigService } from '../app.config';
 
@@ -8,6 +9,7 @@ export class PageService {
   public page_id = '';
 
   constructor(
+    private router: Router,
     private config: ConfigService
   ) {}
 
@@ -43,6 +45,14 @@ export class PageService {
         reject();
       }
     });
+  }
+
+  public transition_to_wall(guid: string): void {
+    this.router.navigateByUrl('/page/' + guid).then(
+      () => {
+        // TODO:: reloading modules relative to guid
+      }
+    );
   }
 
 }
