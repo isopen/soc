@@ -47,7 +47,7 @@ export class WallComponent implements OnInit {
         message: {
           text: msg,
           date: dt,
-          author: 'Max',
+          author: localStorage.getItem('_guid'),
           photo: 'http://3.bp.blogspot.com/_yzU-EquWSV4/S6u8WV0N6WI/AAAAAAAAAHY/ruyngvr9YP0/s200/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA2.PNG'
         }
       };

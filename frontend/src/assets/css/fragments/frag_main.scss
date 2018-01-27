@@ -23,10 +23,10 @@ $params_forms: (
   background-color: #5682a3;
   line-height: 20px;
   border-radius: map-get($params_forms, child_el_radius);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  -webkit-transition: .2s ease-in-out;
+  -moz-transition: .2s ease-in-out;
+  -o-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
 }
 %for_inputs {
   margin-bottom: 10px;
