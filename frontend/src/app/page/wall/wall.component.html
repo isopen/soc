@@ -1,6 +1,8 @@
 <form #sendToWallForm="ngForm">
   <div class="composer_rich_textarea" contenteditable="true" [attr.placeholder]="'wall.rich_placeholder' | translate"></div>
-  <div><button (click)="send_to_wall(sendToWallForm)">Send</button></div>
+  <div>
+    <button class="im_submit_send_label" (click)="send_to_wall(sendToWallForm)">{{ 'wall.button_to_send' | translate }}</button>
+  </div>
 </form>
 <div class="im_history_wrap">
   <div class="im_message_history_wrap">

@@ -18,6 +18,7 @@
     "exit": "Exit"
   },
   "wall": {
-    "rich_placeholder": "Write a message..."
+    "rich_placeholder": "Write a message...",
+    "button_to_send": "Send"
   }
 }

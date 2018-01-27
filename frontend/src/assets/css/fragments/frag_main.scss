@@ -1,0 +1,37 @@
+$params_forms: (
+  auth_form_width: 310px,
+  auth_form_input_width: 270px,
+  auth_form_login_button_width: 100px,
+  auth_form_reg_button_width: 150px,
+  child_el_radius: 3px,
+  form_padding: 20px,
+  hover_opacity: 0.8,
+  button_hover_color: #1596d6
+);
+%for_forms {
+  background-color: #ffffff;
+  padding: map-get($params_forms, form_padding);
+  border-radius: map-get($params_forms, child_el_radius);
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}
+%for_buttons {
+  font-size: 14px;
+  padding: 8px;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  background-color: #5682a3;
+  line-height: 20px;
+  border-radius: map-get($params_forms, child_el_radius);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+%for_inputs {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: map-get($params_forms, child_el_radius);
+  outline: none;
+  border: 1px solid #d3d9de;
+}

@@ -1,3 +1,17 @@
+.im_submit_send_label {
+  font-size: 14px;
+  padding: 8px;
+  outline: none;
+  border: none;
+  color: #ffffff;
+  background-color: #5682a3;
+  line-height: 20px;
+  border-radius: 3px;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out; }
+
 .body_page {
   height: 100%;
   background-color: #fff;
@@ -127,6 +141,12 @@
   content: attr(placeholder);
   color: #9aa2ab;
   display: block; }
+
+.im_submit_send_label {
+  width: 150px; }
+
+.im_submit_send_label:hover {
+  background-color: #1596d6; }
 
 .im_history_wrap {
   position: relative;

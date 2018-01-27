@@ -1,3 +1,5 @@
+@import "fragments/frag_main.scss";
+
 .body_page {
   height: 100%;
   background-color: #fff;
@@ -146,6 +148,15 @@
   content: attr(placeholder);
   color: #9aa2ab;
   display: block;
+}
+
+.im_submit_send_label {
+  width: map-get($params_forms, auth_form_reg_button_width);
+  @extend %for_buttons;
+}
+
+.im_submit_send_label:hover {
+  background-color: map-get($params_forms, button_hover_color);
 }
 
 .im_history_wrap {

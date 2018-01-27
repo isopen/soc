@@ -18,6 +18,7 @@
     "exit": "Выход"
   },
   "wall": {
-    "rich_placeholder": "Напиши сообщение..."
+    "rich_placeholder": "Напиши сообщение...",
+    "button_to_send": "Отправить"
   }
 }
