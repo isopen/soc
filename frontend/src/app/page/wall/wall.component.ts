@@ -72,7 +72,8 @@ export class WallComponent implements OnInit {
   }
 
   transition_to_wall(guid: string): void {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/page/' + guid);
+    // TODO:: reloading modules relative to url
   }
 
   gen_im_message_wrap(data, selector, type): void {
