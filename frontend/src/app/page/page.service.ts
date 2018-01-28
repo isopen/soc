@@ -47,12 +47,8 @@ export class PageService {
     });
   }
 
-  public transition_to_wall(guid: string): void {
-    this.router.navigateByUrl('/page/' + guid).then(
-      () => {
-        // TODO:: reloading modules relative to guid
-      }
-    );
+  public transition_to_wall(guid: string): Promise<{}> {
+    return this.router.navigateByUrl('/page/' + guid);
   }
 
 }
