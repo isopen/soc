@@ -40,7 +40,7 @@ export class WallComponent implements OnInit {
   send_to_wall(form: NgForm, event): void {
 
     if (event) {
-      if (event.keyCode !== 13) {
+      if (event.keyCode !== 13 || event.shiftKey) {
         return;
       }
     }
