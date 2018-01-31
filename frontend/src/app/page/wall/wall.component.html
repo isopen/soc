@@ -1,5 +1,5 @@
 <form #sendToWallForm="ngForm">
-  <div class="composer_rich_textarea" contenteditable="true" [attr.placeholder]="'wall.rich_placeholder' | translate"></div>
+  <div class="composer_rich_textarea" contenteditable="true" (keyup)="send_to_wall(sendToWallForm, $event)" [attr.placeholder]="'wall.rich_placeholder' | translate"></div>
   <div>
     <button class="im_submit_send_label" (click)="send_to_wall(sendToWallForm)">{{ 'wall.button_to_send' | translate }}</button>
   </div>

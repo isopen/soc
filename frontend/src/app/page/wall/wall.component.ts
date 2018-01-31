@@ -37,7 +37,13 @@ export class WallComponent implements OnInit {
 
   }
 
-  send_to_wall(form: NgForm): void {
+  send_to_wall(form: NgForm, event): void {
+
+    if (event) {
+      if (event.keyCode !== 13) {
+        return;
+      }
+    }
 
     const div_textarea = this.el.nativeElement.querySelector('.composer_rich_textarea'),
           msg = div_textarea.textContent;
