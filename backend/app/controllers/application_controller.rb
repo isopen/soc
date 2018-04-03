@@ -93,7 +93,6 @@ class ApplicationController < ActionController::API
                  pp_len >= @len_password_min &&
                  pp_len <= @len_password
         }
-        p params['re_password']
         if reg_validation.call(params['login'], params['password'], params['re_password'])
           return true
         else
