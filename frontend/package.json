@@ -25,12 +25,13 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "actioncable": "^5.1.4",
+    "ajv": "^6.0.0",
     "core-js": "^2.5.3",
     "ngx-cable": "^1.2.2",
     "rxjs": "^5.5.6",
+    "sqlite": "^2.9.1",
     "zangodb": "1.0.7",
-    "zone.js": "^0.8.20",
-    "ajv": "^6.0.0"
+    "zone.js": "^0.8.20"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.8",

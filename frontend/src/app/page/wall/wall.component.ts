@@ -60,25 +60,34 @@ export class WallComponent implements OnInit {
           photo: 'http://3.bp.blogspot.com/_yzU-EquWSV4/S6u8WV0N6WI/AAAAAAAAAHY/ruyngvr9YP0/s200/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA2.PNG'
         }
       };
-      div_textarea.innerHTML = '';
       this.pageService.send(action, data)
         .then(
           () => {
-            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
+            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1)
+              .then(
+                () => {
+                  div_textarea.innerHTML = '';
+                }
+              );
           }
         )
         .catch(
           () => {
             // TODO:: to think over common service
-            this.config.unsent_messages.insert([{action: action, data: JSON.stringify(data)}]);
-            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1);
+            this.gen_im_message_wrap(data, '.im_message_history_wrap', 1)
+              .then(
+                () => {
+                  div_textarea.innerHTML = '';
+                  this.config.unsent_messages.insert([{action: action, data: JSON.stringify(data)}]);
+                }
+              );
           }
         );
     }
 
   }
 
-  gen_im_message_wrap(data, selector, type): void {
+  gen_im_message_wrap(data, selector, type): Promise<{}> {
 
     data.message.date = this.renderer.createText(UtilsService.date_time_format(data.message.date));
     data.message.author = this.renderer.createText(data.message.author);
@@ -143,6 +152,8 @@ export class WallComponent implements OnInit {
     }else {
       this.renderer.appendChild(im_message_history_wrap, im_message_wrap);
     }
+
+    return Promise.resolve('onfulfilled');
 
   }
 
