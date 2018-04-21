@@ -87,7 +87,7 @@ export class WallComponent implements OnInit {
 
   }
 
-  gen_im_message_wrap(data, selector, type): Promise<{}> {
+  async gen_im_message_wrap(data, selector, type) {
 
     data.message.date = this.renderer.createText(UtilsService.date_time_format(data.message.date));
     data.message.author = this.renderer.createText(data.message.author);
@@ -152,8 +152,6 @@ export class WallComponent implements OnInit {
     }else {
       this.renderer.appendChild(im_message_history_wrap, im_message_wrap);
     }
-
-    return Promise.resolve('onfulfilled');
 
   }
 
