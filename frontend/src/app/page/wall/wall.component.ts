@@ -130,9 +130,9 @@ export class WallComponent implements OnInit {
     this.renderer.appendChild(im_message_author, data.message.author);
     this.renderer.listen(im_message_author, 'click', (event) => {
       /* TODO:: generator
-       * 1. get first messages
-       * 2. build wall
-       * 3. redirect to wall
+       * 1. redirect to wall
+       * 2. get first messages
+       * 3. build wall
        */
       this.pageService.transition_to_wall(data.message.author.textContent)
         .then(
