@@ -9,9 +9,9 @@ const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
 
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
-const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
-const { CommonsChunkPlugin } = require('webpack').optimize;
-const { AotPlugin } = require('@ngtools/webpack');
+//const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
+//const { CommonsChunkPlugin } = require('webpack').optimize;
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
@@ -60,6 +60,7 @@ const postcssPlugins = function () {
 
 
 module.exports = {
+  "mode": "production",
   "resolve": {
     "extensions": [
       ".ts",
@@ -253,7 +254,7 @@ module.exports = {
       "exclude": /(\\|\/)node_modules(\\|\/)/,
       "failOnError": false
     }),
-    new NamedLazyChunksWebpackPlugin(),
+    //new NamedLazyChunksWebpackPlugin(),
     new HtmlWebpackPlugin({
       "template": "./src/index.html",
       "filename": "./index.html",
@@ -282,8 +283,8 @@ module.exports = {
         }
     }
     }),
-    new BaseHrefWebpackPlugin({}),
-    new CommonsChunkPlugin({
+    //new BaseHrefWebpackPlugin({}),
+    /*new CommonsChunkPlugin({
       "name": [
         "inline"
       ],
@@ -302,22 +303,22 @@ module.exports = {
       "chunks": [
         "main"
       ]
-    }),
+    }),*/
     new SourceMapDevToolPlugin({
       "filename": "[file].map[query]",
       "moduleFilenameTemplate": "[resource-path]",
       "fallbackModuleFilenameTemplate": "[resource-path]?[hash]",
       "sourceRoot": "webpack:///"
     }),
-    new CommonsChunkPlugin({
+    /*new CommonsChunkPlugin({
       "name": [
         "main"
       ],
       "minChunks": 2,
       "async": "common"
-    }),
+    }),*/
     new NamedModulesPlugin({}),
-    new AotPlugin({
+    new AngularCompilerPlugin({
       "mainPath": "main.ts",
       "replaceExport": false,
       "hostReplacementPaths": {
