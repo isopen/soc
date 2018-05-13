@@ -11,7 +11,7 @@
     "**/*.spec.ts"
   ],
   "include": [
-    "../node_modules/ngx-cable/index.ts",
+    "../node_modules/ngx-cable/*.ts",
     "main.ts",
     "polyfills.ts"
   ]

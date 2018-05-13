@@ -6,5 +6,5 @@
   npm install
 </code><br>
 <code>
-  npm start
+  ng serve
 </code>
