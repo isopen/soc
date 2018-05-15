@@ -25,13 +25,9 @@
     "actioncable": "^5.1.4",
     "ajv": "^6.5.0",
     "core-js": "^2.5.6",
-    "deep-extend": "^0.5.1",
-    "handlebars": "^4.0.11",
-    "hoek": "^5.0.3",
     "ngx-cable": "^1.2.4",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
-    "sshpk": "^1.14.1",
     "zangodb": "^1.0.7",
     "zone.js": "^0.8.26"
   },
