@@ -1,42 +1,11 @@
-const path = require('path');
-const ProgressPlugin = require('webpack/lib/ProgressPlugin');
-const autoprefixer = require('autoprefixer');
-const postcssUrl = require('postcss-url');
-const cssnano = require('cssnano');
-
-const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
+const {
+  NoEmitOnErrorsPlugin,
+  SourceMapDevToolPlugin,
+  NamedModulesPlugin,
+  ProgressPlugin
+} = require('webpack');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
-
-const entryPoints = ["inline","polyfills","sw-register","vendor","main"];
-const minimizeCss = false;
-const baseHref = "";
-const deployUrl = "";
-const postcssPlugins = function () {
-  const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
-  const minimizeOptions = {
-    autoprefixer: false,
-    safe: true,
-    mergeLonghand: false,
-    discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
-  };
-  return [
-    postcssUrl({
-      url: (URL) => {
-        if (!URL.startsWith('/') || URL.startsWith('//')) {
-          return URL;
-        }
-        if (deployUrl.match(/:\/\//)) {
-          return `${deployUrl.replace(/\/$/, '')}${URL}`;
-        } else if (baseHref.match(/:\/\//)) {
-          return baseHref.replace(/\/$/, '') + `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-        } else {
-          return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-        }
-      }
-    }),
-    autoprefixer(),
-  ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
-};
+const path = require('path');
 
 module.exports = {
   "mode": "production",
@@ -103,13 +72,6 @@ module.exports = {
               "sourceMap": false,
               "importLoaders": 1
             }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
           }
         ]
       },
@@ -123,13 +85,6 @@ module.exports = {
             "options": {
               "sourceMap": false,
               "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
             }
           },
           {
@@ -155,13 +110,6 @@ module.exports = {
             }
           },
           {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
-          },
-          {
             "loader": "less-loader",
             "options": {
               "sourceMap": false
@@ -179,13 +127,6 @@ module.exports = {
             "options": {
               "sourceMap": false,
               "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
             }
           },
           {
