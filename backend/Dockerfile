@@ -1,4 +1,4 @@
-FROM ruby:2.3-alpine
+FROM ruby:2.5-alpine
 
 RUN apk add --update tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
@@ -9,7 +9,8 @@ RUN apk add --update --virtual runtime-deps nodejs libffi-dev readline sqlite sq
 WORKDIR /tmp
 ADD /Gemfile* ./
 
-RUN apk add --virtual build-deps build-base openssl-dev libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
+RUN apk add --virtual build-deps build-base libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
+    bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java && \
     bundle install --jobs=2 && \
     apk del build-deps
 
