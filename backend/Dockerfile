@@ -6,13 +6,13 @@ RUN apk add --update tzdata && \
 
 RUN apk add --update --virtual runtime-deps nodejs libffi-dev readline sqlite sqlite-dev
 
+RUN apk add --update --virtual build-deps build-base libc-dev linux-headers libxml2-dev libxslt-dev readline-dev
+
 WORKDIR /tmp
 ADD /Gemfile* ./
 
-RUN apk add --virtual build-deps build-base libc-dev linux-headers libxml2-dev libxslt-dev readline-dev && \
-    bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java && \
-    bundle install --jobs=2 && \
-    apk del build-deps
+RUN bundle lock --add-platform x86-mingw32 x86-mswin32 x64-mingw32 java && \
+    bundle install --jobs=4
 
 ENV APP_HOME /backend
 COPY / $APP_HOME
