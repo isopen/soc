@@ -6,7 +6,7 @@ RUN apk add --update tzdata && \
 
 RUN apk add --update --virtual runtime-deps nodejs libffi-dev readline sqlite sqlite-dev
 
-RUN apk add --update --virtual build-deps build-base libc-dev linux-headers libxml2-dev libxslt-dev readline-dev
+RUN apk add --update --virtual build-deps build-base libc-dev linux-headers libxml2-dev libxslt-dev readline-dev ruby-dev
 
 WORKDIR /tmp
 ADD /Gemfile* ./
