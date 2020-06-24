@@ -26,7 +26,7 @@ module Backend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 6.0
     config.generators do |g|
       g.orm :mongoid
     end
