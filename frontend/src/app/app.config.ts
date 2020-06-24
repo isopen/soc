@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { NgXCable, Broadcaster } from 'ngx-cable';
+import {NgXCable, Broadcaster} from 'ngx-cable';
 import * as zango from 'zangodb';
 
 @Injectable()

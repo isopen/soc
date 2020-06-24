@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-
-import { ConfigService } from '../app.config';
+import {Injectable} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {ConfigService} from '../app.config';
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private http: HttpClient,
     private router: Router,
     private config: ConfigService
-  ) {}
+  ) {
+  }
 
   private set_session(id: string, token: string): void {
     localStorage.setItem('_guid', id);
@@ -80,27 +79,27 @@ export class AuthService {
       re_password: form.value.re_password
     };
     this.http.post(this.config.back_host + '/reg', params)
-    .subscribe(
-      response => {
-        console.log(response);
-        switch (response['type']) {
-          case 'reg_success':
-            this.set_session(response['id']['$oid'], response['token']);
-            delete params.login;
-            delete params.password;
-            params['guid'] = response['id']['$oid'];
-            params['token'] = response['token'];
-            params['fl_auth_page'] = true;
-            this.auth_client(params);
-          break;
-          case 'reg_error':
-          break;
+      .subscribe(
+        response => {
+          console.log(response);
+          switch (response['type']) {
+            case 'reg_success':
+              this.set_session(response['id']['$oid'], response['token']);
+              delete params.login;
+              delete params.password;
+              params['guid'] = response['id']['$oid'];
+              params['token'] = response['token'];
+              params['fl_auth_page'] = true;
+              this.auth_client(params);
+              break;
+            case 'reg_error':
+              break;
+          }
+        },
+        error => {
+          console.log(error);
         }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      );
   }
 
   redirect_to_user_page(): void {

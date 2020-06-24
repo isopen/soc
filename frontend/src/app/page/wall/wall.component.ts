@@ -1,10 +1,10 @@
-import { Renderer2, Component, ElementRef, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {Renderer2, Component, ElementRef, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
-import { PageService } from '../page.service';
-import { ConfigService } from '../../app.config';
-import { UtilsService } from '../../utils/app.utils';
+import {PageService} from '../page.service';
+import {ConfigService} from '../../app.config';
+import {UtilsService} from '../../utils/app.utils';
 
 @Component({
   selector: '.wall_page',
@@ -17,9 +17,10 @@ export class WallComponent implements OnInit {
     private pageService: PageService,
     private config: ConfigService,
     private activateRoute: ActivatedRoute
-  ) {}
-  ngOnInit() {
+  ) {
+  }
 
+  ngOnInit() {
     this.config.broadcaster.on(this.config.main_channel)
       .subscribe(
         response => {
@@ -34,11 +35,9 @@ export class WallComponent implements OnInit {
           }
         }
       );
-
   }
 
   send_to_wall(form: NgForm, event): void {
-
     if (event) {
       if (event.keyCode !== 13 || event.shiftKey) {
         return;
@@ -84,11 +83,9 @@ export class WallComponent implements OnInit {
           }
         );
     }
-
   }
 
   async gen_im_message_wrap(data, selector, type) {
-
     data.message.date = this.renderer.createText(UtilsService.date_time_format(data.message.date));
     data.message.author = this.renderer.createText(data.message.author);
 
@@ -154,10 +151,9 @@ export class WallComponent implements OnInit {
 
     if (im_message_history_wrap.children.length > 0) {
       this.renderer.insertBefore(im_message_history_wrap, im_message_wrap, im_message_history_wrap.children[0]);
-    }else {
+    } else {
       this.renderer.appendChild(im_message_history_wrap, im_message_wrap);
     }
 
   }
-
 }

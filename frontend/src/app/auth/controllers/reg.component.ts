@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { AuthService } from '../auth.service';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: '.reg_form',
@@ -11,9 +10,11 @@ export class RegComponent implements OnInit {
 
   constructor(
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   reg(form: NgForm): void {
 

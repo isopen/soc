@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { ConfigService } from '../app.config';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {ConfigService} from '../app.config';
 
 @Injectable()
 export class PageService {
@@ -11,10 +10,10 @@ export class PageService {
   constructor(
     private router: Router,
     private config: ConfigService
-  ) {}
+  ) {
+  }
 
   public open_page_subscriptions() {
-
     const guid = localStorage.getItem('_guid'),
           token = localStorage.getItem('_token');
 
@@ -34,14 +33,13 @@ export class PageService {
       params['room'] = this.page_id;
       this.config.ngcable.subscribe(params);
     }
-
   }
 
   public send(action, data): Promise<{}> {
     return new Promise((resolve, reject) => {
       if (this.config.ngcable.perform(action, data)) {
         resolve();
-      }else {
+      } else {
         reject();
       }
     });
