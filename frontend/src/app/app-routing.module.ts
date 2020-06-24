@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { AuthComponent } from './auth/auth.component';
-import { PageComponent } from './page/page.component';
-import { NotComponent } from './404/not.component';
+import {AuthComponent} from './auth/auth.component';
+import {PageComponent} from './page/page.component';
+import {NotComponent} from './404/not.component';
 
 export const routes: Routes = [
   {
@@ -36,4 +36,5 @@ export const routes: Routes = [
     RouterModule
   ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { NgXCable, Broadcaster } from 'ngx-cable';
+import {NgXCable, Broadcaster} from 'ngx-cable';
 import * as zango from 'zangodb';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class ConfigService {
     public ngcable: NgXCable,
     public broadcaster: Broadcaster
   ) {
-    this.db = new zango.Db('soc', 1.0, this.db_config);
-    this.unsent_messages = this.db.collection('unsent_messages');
+    // this.db = new zango.Db('soc', 1.0, this.db_config);
+    // this.unsent_messages = this.db.collection('unsent_messages');
   }
 }

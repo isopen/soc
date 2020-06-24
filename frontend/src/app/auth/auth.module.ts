@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './controllers/login.component';
-import { RegComponent } from './controllers/reg.component';
-
-import { AuthService } from './auth.service';
+import {NgModule} from '@angular/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {AuthComponent} from './auth.component';
+import {LoginComponent} from './controllers/login.component';
+import {RegComponent} from './controllers/reg.component';
+import {AuthService} from './auth.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,4 +35,5 @@ export function createTranslateLoader(http: HttpClient) {
     AuthComponent
   ]
 })
-export class AuthModule { }
+export class AuthModule {
+}
